@@ -3,6 +3,7 @@ import torch.nn as nn
 import torch.optim as optim
 from sklearn.metrics import mean_squared_error
 from load_data import load_and_split_movielens
+import pickle
 
 class RecommenderNN(nn.Module):
     def __init__(self, n_users, n_items, embedding_dim):
@@ -78,3 +79,23 @@ if __name__ == "__main__":
     
     # Evaluate the model
     evaluate_model(model, test_data)
+
+    import os
+    import torch
+
+    # Create the models directory if it doesn't exist
+    if not os.path.exists('models'):
+        os.makedirs('models')
+
+    # Save the model
+    model_path = 'models/recommender_model.pth'
+    torch.save(model.state_dict(), model_path)
+    print(f'Model saved to {model_path}')
+
+    # Save the item factors
+    item_factors = model.item_embedding.weight.data.numpy()
+    item_factors_dict = {i: item_factors[i] for i in range(len(item_factors))}
+    item_factors_path = 'models/item_factors_nn.pkl'
+    with open(item_factors_path, 'wb') as f:
+        pickle.dump(item_factors_dict, f)
+    print(f'Item factors saved to {item_factors_path}')

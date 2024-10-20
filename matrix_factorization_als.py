@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 from load_data import load_and_split_movielens
 from sklearn.metrics import mean_squared_error
 
@@ -15,7 +14,9 @@ class ALS:
         self.user_ids = ratings['user_id'].unique()
         self.item_ids = ratings['item_id'].unique()
         self.user_map = {user_id: i for i, user_id in enumerate(self.user_ids)}
-        self.item_map = {item_id: i for i, item_id in enumerate(self.item_ids)}
+        self.item_map = {item_id: i for i, item_id in enumerate(self.item_ids)}            
+        self.user_idx_to_id = {i: user_id for i, user_id in enumerate(self.user_ids)}
+        self.item_idx_to_id = {i: item_id for i, item_id in enumerate(self.item_ids)}
         
         self.n_users = len(self.user_ids)
         self.n_items = len(self.item_ids)
@@ -72,6 +73,9 @@ class ALS:
         else:
             return np.nan
 
+    def get_item_factors(self):
+        return {self.item_idx_to_id[i]: self.item_factors[i] for i in range(len(self.item_ids))}
+
 if __name__ == "__main__":
     # Load the data
     train_data, val_data, test_data = load_and_split_movielens()
@@ -103,3 +107,25 @@ if __name__ == "__main__":
     print(f'Test MSE: {mse_test:.4f}')
     print(f'Number of NaN predictions in test data: {nan_count_test}')
     print(f'Size of test data: {len(test_data)}')
+
+    import os
+    import pickle
+
+    # Create the models directory if it doesn't exist
+    if not os.path.exists('models'):
+        os.makedirs('models')
+
+    # Save the ALS factors for users and items
+    user_factors_path = 'models/user_factors.pkl'
+    item_factors_path = 'models/item_factors.pkl'
+
+    with open(user_factors_path, 'wb') as f:
+        pickle.dump(als.user_factors, f)
+    print(f'User factors saved to {user_factors_path}')
+
+    with open(item_factors_path, 'wb') as f:
+        pickle.dump(als.get_item_factors(), f)
+    print(f'Item factors saved to {item_factors_path}')
+
+
+
