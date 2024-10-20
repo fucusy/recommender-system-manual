@@ -47,7 +47,7 @@ class ALS:
                     continue
                 item_ids = [item_map[item_id] for item_id in user_ratings['item_id']]
                 Y = item_factors[item_ids]
-                A = YTY + Y.T.dot(Y) + lambdaI
+                A = Y.T.dot(Y) + lambdaI
                 b = Y.T.dot(user_ratings['rating'])
                 user_factors[u] = np.linalg.solve(A, b)
         else:
@@ -59,7 +59,7 @@ class ALS:
                     continue
                 user_ids = [user_map[user_id] for user_id in item_ratings['user_id']]
                 X = user_factors[user_ids]
-                A = XTX + X.T.dot(X) + lambdaI
+                A = X.T.dot(X) + lambdaI
                 b = X.T.dot(item_ratings['rating'])
                 item_factors[i] = np.linalg.solve(A, b)
         return user_factors if user_step else item_factors
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     train_data, val_data, test_data = load_and_split_movielens()
 
     # Train the ALS model
-    als = ALS(n_factors=10, n_iterations=40, lambda_reg=0.1)
+    als = ALS(n_factors=10, n_iterations=10, lambda_reg=0.1)
     als.fit(train_data)
 
     # Predict ratings for validation data

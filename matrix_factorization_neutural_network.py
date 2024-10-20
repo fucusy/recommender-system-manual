@@ -74,7 +74,7 @@ if __name__ == "__main__":
     model = RecommenderNN(n_users, n_items, embedding_dim)
     
     # Train the model
-    train_model(model, train_data, val_data, n_epochs=100, lr=0.01)
+    train_model(model, train_data, val_data, n_epochs=1000, lr=0.01)
     
     # Evaluate the model
     evaluate_model(model, test_data)
