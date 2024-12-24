@@ -1,4 +1,7 @@
 import numpy as np
+import torch
+import torch.nn as nn
+from loss import PairwiseHingeLoss
 
 class RecommenderEnv:
     
@@ -159,15 +162,12 @@ class BanditAgent(Agent):
         title_ranking = np.argsort(expected_rewards)[::-1]
         return title_ranking
 
-    
-import torch
-import torch.nn as nn
 
-class LearningToRankModel(nn.Module):
+class PointWiseModel(nn.Module):
     def __init__(self, num_titles):
         self.embedding_dim = 16
         self.hidden_dim = 8
-        super(LearningToRankModel, self).__init__()
+        super(PointWiseModel, self).__init__()
 
         self.embedding_layer = nn.Embedding(num_titles, self.embedding_dim)
         self.linear1 = nn.Linear(self.embedding_dim, self.hidden_dim)
@@ -182,10 +182,10 @@ class LearningToRankModel(nn.Module):
         batch_size = title_ids.shape[0]
         return score.view(batch_size)
 
-class LearningToRankAgent(Agent):
+class PointWiseModelAgent(Agent):
     def __init__(self, num_titles):
         self.num_titles = num_titles        
-        self.model = LearningToRankModel(num_titles)
+        self.model = PointWiseModel(num_titles)
         self.collected_training_data = [] # each element is a tuple of (title_ids, user_feedback)
         self.valid_title_ids = [] # each element is a title id
         self.valid_user_feedback = [] # each element is a user feedback, 1 for CLICK, 0 for SKIP
@@ -205,9 +205,7 @@ class LearningToRankAgent(Agent):
                 else:
                     self.valid_user_feedback.append(0)
         self.accumulate_user_feedback(title_ids, user_feedback)
-
-        
-
+    
     def understand_agent(self):
         print("model parameters: ", self.model.parameters())
 
@@ -255,7 +253,102 @@ class LearningToRankAgent(Agent):
 
         print("Training completed")
 
-   
+
+class PairWiseModel(nn.Module):
+    def __init__(self, num_titles):
+        self.embedding_dim = 16
+        self.hidden_dim = 8
+        super(PairWiseModel, self).__init__()
+
+        self.embedding_layer = nn.Embedding(num_titles, self.embedding_dim)
+        self.linear1 = nn.Linear(self.embedding_dim, self.hidden_dim)
+        self.linear2 = nn.Linear(self.hidden_dim, 1)
+
+    def forward(self, title_ids):
+        # Get embeddings for title ids
+        embeddings = self.embedding_layer(title_ids)
+        # Forward pass through the network
+        h = torch.relu(self.linear1(embeddings))
+        score = self.linear2(h)
+        return score
+
+
+class PairWiseModelAgent(Agent):
+    def __init__(self, num_titles):
+        self.num_titles = num_titles        
+        self.model = PairWiseModel(num_titles)
+        self.collected_training_data = [] # each element is a tuple of (title_ids, user_feedback)
+        self.clean_training_data = [] # each element is a tuple of (title_ids, list of 1 or 0)
+
+    def make_ranking(self):
+        # Get scores for all titles
+        title_ids = torch.arange(self.num_titles)
+        scores = self.model(title_ids)
+        # Return titles sorted by their scores (highest first)
+        title_scores = list(zip(title_ids, scores))
+        title_scores.sort(key=lambda x: x[1], reverse=True)
+        sorted_title_ids = [title_id for title_id, score in title_scores]
+        return torch.tensor(sorted_title_ids)
+
+    def collect_user_feedback(self, title_ids, user_feedback):
+        clean_user_feedback = []
+        clean_title_ids = []
+        click_count = 0
+        for title_id, feedback in zip(title_ids, user_feedback):
+            if feedback != "NOT_SEEN":
+                clean_user_feedback.append(1 if feedback == "CLICK" else 0)
+                clean_title_ids.append(title_id)
+                if feedback == "CLICK":
+                    click_count += 1
+        if len(clean_title_ids) > 1 and click_count > 0:
+            self.clean_training_data.append((clean_title_ids, clean_user_feedback))
+        self.accumulate_user_feedback(title_ids, user_feedback)
+    
+    def understand_agent(self):
+        print("model parameters: ", self.model.parameters())
+
+    def day_ends(self):
+        self.train()
+
+    def accumulate_user_feedback(self, title_ids, user_feedback):
+        self.collected_training_data.append((title_ids, user_feedback))
+
+    def train(self):
+        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.001)
+        # using Sigmoid Cross Entropy Loss first
+        criterion = PairwiseHingeLoss()
+
+        class UserFeedbackDataset(torch.utils.data.Dataset):
+            def __init__(self, clean_training_data):
+                self.clean_training_data = clean_training_data
+
+            def __len__(self):
+                return len(self.clean_training_data)
+
+            def __getitem__(self, idx):
+                title_ids, user_feedback = self.clean_training_data[idx]
+                return torch.tensor(title_ids, dtype=torch.long), torch.tensor(user_feedback, dtype=torch.float32), torch.tensor(len(title_ids), dtype=torch.long)
+
+        dataset = UserFeedbackDataset(self.clean_training_data)
+        dataloader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
+
+        for epoch in range(1000):
+            epoch_loss = 0.0
+            data_size = 0
+            for title_ids, user_feedback, n in dataloader:
+                optimizer.zero_grad()
+                outputs = self.model(title_ids)[0].reshape(1, -1)
+                user_feedback = user_feedback.reshape(1, -1)
+                loss = criterion(outputs, user_feedback, n).sum()
+                loss.backward()
+                optimizer.step()
+                epoch_loss += loss.item()
+                data_size += len(title_ids)
+            if epoch % 100 == 0:
+                print(f"Epoch {epoch}, data points: {data_size}, Loss per data point: {epoch_loss / data_size}")
+
+        print("Training completed")
+
 
 if __name__ == "__main__":
     title_size = 100
@@ -265,9 +358,9 @@ if __name__ == "__main__":
     start_time = time.time()
     env = RecommenderEnv(num_titles=title_size)
     bandit = BanditAgent(num_titles=title_size)
-    ltr = LearningToRankAgent(num_titles=title_size)
-
-    agent = ltr
+    pointwise_agent = PointWiseModelAgent(num_titles=title_size)
+    pairwise_agent = PairWiseModelAgent(num_titles=title_size)
+    agent = pairwise_agent
 
     # sort by probability, print the title id and value
     sorted_probabilities = sorted(enumerate(env.click_probabilities), key=lambda x: x[1], reverse=True)

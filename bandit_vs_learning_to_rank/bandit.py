@@ -1,11 +1,8 @@
-import PIL.Image
 import numpy as np
 from sklearn import datasets
 from sklearn import linear_model
 import pandas as pd
 import matplotlib.pyplot as plt
-
-
 
 data, label = datasets.load_digits(return_X_y=True)
 
