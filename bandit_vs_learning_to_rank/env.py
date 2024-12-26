@@ -36,23 +36,61 @@ class RecommenderEnv:
         
         if not (0 <= self.exit_probability <= 1):
             raise ValueError("Exit probability must be between 0 and 1")
+        
+        # set up the duration for each title
+        # sample a value from a normal distribution with mean 120 and std 10
+        self.title_duration = np.random.normal(120, 10, self.num_titles)
+        self.title_duration = np.clip(self.title_duration, 10, 1000)
+        self.title_duration = np.round(self.title_duration)
+
+        # set up two types of completion rate distribution parameters for each title
+        # 1. the completion rate distribution parameters when the user has intention to finish the title
+        # 2. the completion rate distribution parameters when the user has no intention to finish the title
+        self.completion_rate_mean_with_intention = np.random.normal(0.9, 0.2, self.num_titles)
+        self.completion_rate_mean_without_intention = np.random.normal(0.1, 0.01, self.num_titles)
+        self.completion_rate_mean_with_intention = np.clip(self.completion_rate_mean_with_intention, 0, 1)
+        self.completion_rate_mean_without_intention = np.clip(self.completion_rate_mean_without_intention, 0, 1)
+
+        self.completion_rate_std_with_intention = np.random.normal(0.15, 0.01, self.num_titles)
+        self.completion_rate_std_without_intention = np.random.normal(0.015, 0.001, self.num_titles)
+        self.completion_rate_std_with_intention = np.clip(self.completion_rate_std_with_intention, 0, 1)
+        self.completion_rate_std_without_intention = np.clip(self.completion_rate_std_without_intention, 0, 1)
+
+        # set up finish intentation probability for each title
+        self.finish_intention_probability = np.random.normal(0.5, 0.1, self.num_titles)
+        self.finish_intention_probability = np.clip(self.finish_intention_probability, 0, 1)
+
+
 
     def get_title_list(self):
         return list(range(self.num_titles))
 
-    def get_click(self, title_id):
+    def get_single_user_feedback(self, title_id):
         """Get click outcome for a shown title based on its probability.
         
         Args:
             title_id (int): ID of the title shown
             
         Returns:
-            int: 1 if clicked, 0 if not clicked
+            tuple: (click, watch_duration_minutes) : (bool, int), for example (True, 10)
         """
         if not 0 <= title_id < self.num_titles:
             raise ValueError(f"Title ID must be between 0 and {self.num_titles-1}")
-            
-        return int(np.random.random() < self.click_probabilities[title_id])
+        
+        if np.random.random() < self.finish_intention_probability[title_id]:
+            # the user has intention to finish the title
+            completion_rate = np.random.normal(self.completion_rate_mean_with_intention[title_id], self.completion_rate_std_with_intention[title_id])
+            completion_rate = np.clip(completion_rate, 0, 1)
+            watch_duration_minutes = self.title_duration[title_id] * completion_rate
+        else:
+            # the user has no intention to finish the title
+            completion_rate = np.random.normal(self.completion_rate_mean_without_intention[title_id], self.completion_rate_std_without_intention[title_id])
+            completion_rate = np.clip(completion_rate, 0, 1)
+            watch_duration_minutes = self.title_duration[title_id] * completion_rate
+        
+        clicked = np.random.random() < self.click_probabilities[title_id]
+
+        return clicked, watch_duration_minutes
 
 
     def get_user_feedback(self, title_rankings):
@@ -66,27 +104,56 @@ class RecommenderEnv:
         """
         feedback = []
         for title_id in title_rankings:
-            if np.random.random() < self.click_probabilities[title_id]:
-                feedback.append("CLICK")                
+            clicked, watch_duration_minutes = self.get_single_user_feedback(title_id)
+            if clicked:
+                feedback.append(("CLICK", watch_duration_minutes))
             else:
-                feedback.append("SKIP")
+                feedback.append(("SKIP", 0))
             if np.random.random() < self.exit_probability:
                 break
-        feedback.extend(["NOT_SEEN"] * (len(title_rankings) - len(feedback)))
+        feedback.extend([("NOT_SEEN", 0)] * (len(title_rankings) - len(feedback)))
         return feedback
     
     def get_maximum_expected_reward(self):
+        """
+        The reward is a tuple with two elements, the first is the maximum expected clicks, the second is the maximum expected watch duration
+        This function will return maximum reward at two different scenarios:
+        1. the maximum expected clicks
+        2. the maximum expected watch duration                
+        """
+
+        # calculate the expected watch duration for each title
+        completion_rate_mean = self.finish_intention_probability * self.completion_rate_mean_with_intention + (1 - self.finish_intention_probability) * self.completion_rate_mean_without_intention
+        expected_watch_duration = self.title_duration * completion_rate_mean * self.click_probabilities
+
+        # scenarios 1: when the number of clicks is maximized
         # sort the click probabilities in descending order
         sorted_click_probabilities = sorted(enumerate(self.click_probabilities), key=lambda x: x[1], reverse=True)
 
         # loop through the sorted probabilities and calculate the expected reward
-        expected_reward = 0
+        expected_reward_clicks = 0
+        expected_reward_watch_duration = 0
         seen_probability = 1
         for title_id, click_probability in sorted_click_probabilities:
-            expected_reward += click_probability * seen_probability
+            expected_reward_clicks += click_probability * seen_probability
+            expected_reward_watch_duration += expected_watch_duration[title_id] * seen_probability
             seen_probability *= (1 - self.exit_probability)
 
-        return expected_reward    
+        max_rewards_when_clicks_maximized = (expected_reward_clicks, expected_reward_watch_duration)
+
+
+        # scenarios 2: when the watch duration is maximized
+        # sort the expected watch durations in descending order
+        sorted_watch_durations = sorted(enumerate(expected_watch_duration), key=lambda x: x[1], reverse=True)
+        expected_reward_clicks = 0
+        expected_reward_watch_duration = 0
+        seen_probability = 1
+        for title_id, watch_duration in sorted_watch_durations:
+            expected_reward_clicks += self.click_probabilities[title_id] * seen_probability
+            expected_reward_watch_duration += watch_duration * seen_probability
+            seen_probability *= (1 - self.exit_probability)
+        max_rewards_when_watch_duration_maximized = (expected_reward_clicks, expected_reward_watch_duration)
+        return max_rewards_when_clicks_maximized, max_rewards_when_watch_duration_maximized
 
     def manual_edit_ranking(self):
         """
@@ -124,6 +191,11 @@ class Agent:
         raise NotImplementedError("Subclasses must implement the understand_agent method")
 
     def collect_user_feedback(self, title_ranking, user_feedback):
+        """
+        Collect user feedback for a given title ranking
+        :param title_ranking: list of title ids that were shown to the user, e.g. [0, 1, 2, ...]
+        :param user_feedback: list of tuple of feedback from user, action and watch duration, e.g. [("CLICK", 10), ("SKIP", 0), ("NOT_SEEN", 0), ...]
+        """
         raise NotImplementedError("Subclasses must implement the collect_user_feedback method")
     
     def day_starts(self):
@@ -144,7 +216,8 @@ class BanditAgent(Agent):
         self.seen_counts = np.zeros(num_titles)
    
     def collect_user_feedback(self, title_ranking, user_feedback):
-        self.update_theta(title_ranking, user_feedback)
+        clean_user_feedback = [feedback for feedback, _ in user_feedback]
+        self.update_theta(title_ranking, clean_user_feedback)
 
     def make_ranking(self):
         if np.random.rand() < self.epsilon:
@@ -202,7 +275,8 @@ class BucketSortingAgent(Agent):
         self.click_through_rates = np.zeros(num_titles)
    
     def collect_user_feedback(self, title_ranking, user_feedback):
-        self.update_parameters(title_ranking, user_feedback)
+        clean_user_feedback = [feedback for feedback, _ in user_feedback]
+        self.update_parameters(title_ranking, clean_user_feedback)
 
     def make_ranking(self):
         # sort by click count first, group them into 10 buckets, the clicks in each bucket are equal, means the number of clicks in each bucket is 10% of the total clicks
@@ -272,7 +346,6 @@ class PointWiseModelAgent(Agent):
     def __init__(self, num_titles):
         self.num_titles = num_titles        
         self.model = PointWiseModel(num_titles)
-        self.collected_training_data = [] # each element is a tuple of (title_ids, user_feedback)
         self.valid_title_ids = [] # each element is a title id
         self.valid_user_feedback = [] # each element is a user feedback, 1 for CLICK, 0 for SKIP
 
@@ -283,7 +356,8 @@ class PointWiseModelAgent(Agent):
         return torch.argsort(scores, descending=True)
 
     def collect_user_feedback(self, title_ids, user_feedback):
-        for title_id, feedback in zip(title_ids, user_feedback):
+        clean_user_feedback = [feedback for feedback, _ in user_feedback]
+        for title_id, feedback in zip(title_ids, clean_user_feedback):
             if feedback != "NOT_SEEN":
                 self.valid_title_ids.append(title_id)
                 if feedback == "CLICK":
@@ -292,18 +366,14 @@ class PointWiseModelAgent(Agent):
                     self.valid_user_feedback.append(0)
             else:
                 break
-        self.accumulate_user_feedback(title_ids, user_feedback)
     
     def understand_agent(self):
         print("agent name: ", self.__class__.__name__)
         print("model parameters: ", self.model.parameters())
 
     def day_starts(self):
-        if len(self.collected_training_data) > 0:
+        if len(self.valid_title_ids) > 0:
             self.train()
-
-    def accumulate_user_feedback(self, title_ids, user_feedback):
-        self.collected_training_data.append((title_ids, user_feedback))
 
     def train(self):
         optimizer = torch.optim.SGD(self.model.parameters(), lr=0.001)
@@ -367,7 +437,6 @@ class PairWiseModelAgent(Agent):
     def __init__(self, num_titles):
         self.num_titles = num_titles        
         self.model = PairWiseModel(num_titles)
-        self.collected_training_data = [] # each element is a tuple of (title_ids, user_feedback)
         self.clean_training_data = [] # each element is a tuple of (title_ids, list of 1 or 0)
 
     def make_ranking(self):
@@ -384,7 +453,8 @@ class PairWiseModelAgent(Agent):
         clean_user_feedback = []
         clean_title_ids = []
         click_count = 0
-        for title_id, feedback in zip(title_ids, user_feedback):
+        for title_id, feedbacks in zip(title_ids, user_feedback):
+            feedback, watch_duration = feedbacks
             if feedback != "NOT_SEEN":
                 clean_user_feedback.append(1 if feedback == "CLICK" else 0)
                 clean_title_ids.append(title_id)
@@ -394,18 +464,16 @@ class PairWiseModelAgent(Agent):
                 break
         if len(clean_title_ids) > 1 and click_count > 0:
             self.clean_training_data.append((clean_title_ids, clean_user_feedback))
-        self.accumulate_user_feedback(title_ids, user_feedback)
+        
     
     def understand_agent(self):
         print("agent name: ", self.__class__.__name__)
         print("model parameters: ", self.model.parameters())
 
     def day_starts(self):
-        if len(self.collected_training_data) > 0:
+        if len(self.clean_training_data) > 0:
             self.train()
 
-    def accumulate_user_feedback(self, title_ids, user_feedback):
-        self.collected_training_data.append((title_ids, user_feedback))
 
     def train(self):
         optimizer = torch.optim.SGD(self.model.parameters(), lr=0.001)
@@ -444,7 +512,7 @@ class PairWiseModelAgent(Agent):
         print("Training completed")
 
 if __name__ == "__main__":
-    title_size = 1000
+    title_size = 100
     user_size = 10 * title_size
     run_days = 10
 
@@ -469,17 +537,27 @@ if __name__ == "__main__":
     for title_id, probability in sorted_probabilities:
         print(f"title {title_id}: {round(probability, 2)}")
 
-    maximum_expected_reward = env.get_maximum_expected_reward()
-    
+    reward_when_clicks_maximized, reward_when_watch_duration_maximized = env.get_maximum_expected_reward()
+    print("reward_when_clicks_maximized: ", reward_when_clicks_maximized)
+    print("reward_when_watch_duration_maximized: ", reward_when_watch_duration_maximized)
+    max_reward_clicks = reward_when_clicks_maximized[0]
+    max_reward_watch_duration = reward_when_watch_duration_maximized[1]
+
     for agent in agents:
-        actual_reward = 0.0
-        max_reward = 0.0
-        actual_reward_list = []
-        max_reward_list = []
+        actual_click_reward_total = 0.0
+        actual_watch_duration_reward_total = 0.0
+        max_clicks_reward_total = 0.0
+        max_watch_duration_reward_total = 0.0
+        actual_clicks_reward_list = []
+        actual_watch_duration_reward_list = []
+        max_clicks_reward_list = []
+        max_watch_duration_reward_list = []
         print("agent name: ", agent.__class__.__name__)
         for day in range(total_days):
-            actual_reward_the_day = 0.0
-            max_reward_the_day = 0.0
+            actual_clicks_the_day = 0.0
+            actual_watch_duration_the_day = 0.0
+            max_clicks_reward_the_day = 0.0
+            max_watch_duration_reward_the_day = 0.0
             manual_edit_stage = include_manual_edit_stage and day < edit_stage_days
             if not manual_edit_stage:
                 agent.day_starts()
@@ -495,20 +573,32 @@ if __name__ == "__main__":
 
                 user_feedback = env.get_user_feedback(title_ranking)
                 
-                click_count = sum(1 for feedback in user_feedback if feedback == "CLICK")
-                actual_reward_the_day += click_count
-                max_reward_the_day += maximum_expected_reward
+                click_count = sum(1 for feedback, watch_duration in user_feedback if feedback == "CLICK")
+                watch_duration = sum(watch_duration for feedback, watch_duration in user_feedback if feedback == "CLICK")
+
+                actual_clicks_the_day += click_count
+                actual_watch_duration_the_day += watch_duration
+
+                max_clicks_reward_the_day += max_reward_clicks
+                max_watch_duration_reward_the_day += max_reward_watch_duration
+
                 agent.collect_user_feedback(title_ranking, user_feedback)
                 
-            actual_reward += actual_reward_the_day
-            max_reward += max_reward_the_day
-            actual_reward_list.append(actual_reward)
-            max_reward_list.append(max_reward)
+            actual_click_reward_total += actual_clicks_the_day
+            max_clicks_reward_total += max_clicks_reward_the_day
+            actual_watch_duration_reward_total += actual_watch_duration_the_day
+            max_watch_duration_reward_total += max_watch_duration_reward_the_day
+            actual_clicks_reward_list.append(actual_clicks_the_day)
+            max_clicks_reward_list.append(max_clicks_reward_the_day)
+            actual_watch_duration_reward_list.append(actual_watch_duration_the_day)
+            max_watch_duration_reward_list.append(max_watch_duration_reward_the_day)
             
-            print(f"Day {day}, actual_reward: {actual_reward_the_day}, max_reward: {max_reward_the_day}")
+            print(f"Day {day}, actual_clicks_reward: {actual_clicks_the_day}, max_clicks_reward: {max_clicks_reward_the_day}, actual_watch_duration_reward: {actual_watch_duration_the_day}, max_watch_duration_reward: {max_watch_duration_reward_the_day}")
         agent.understand_agent()
-        print("actual_reward (rounded): ", round(actual_reward, 2))
-        print("max_reward (rounded): ", round(max_reward, 2))
+        print("actual_clicks_reward (rounded): ", round(actual_click_reward_total, 2))
+        print("max_clicks_reward (rounded): ", round(max_clicks_reward_total, 2))
+        print("actual_watch_duration_reward (rounded): ", round(actual_watch_duration_reward_total, 2))
+        print("max_watch_duration_reward (rounded): ", round(max_watch_duration_reward_total, 2))
     # import matplotlib.pyplot as plt
     # plt.plot(actual_reward_list, label="actual_reward")
     # plt.plot(max_reward_list, label="max_reward")
