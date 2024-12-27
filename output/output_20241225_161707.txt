@@ -1,0 +1,158 @@
+title 36: 0.1
+title 49: 0.1
+title 16: 0.1
+title 47: 0.1
+title 56: 0.1
+title 82: 0.1
+title 66: 0.09
+title 53: 0.09
+title 52: 0.09
+title 74: 0.09
+title 32: 0.09
+title 22: 0.09
+title 72: 0.09
+title 83: 0.09
+title 60: 0.09
+title 1: 0.09
+title 57: 0.08
+title 14: 0.08
+title 81: 0.08
+title 2: 0.08
+title 70: 0.08
+title 73: 0.08
+title 42: 0.08
+title 34: 0.08
+title 3: 0.08
+title 0: 0.08
+title 29: 0.08
+title 59: 0.08
+title 90: 0.08
+title 27: 0.07
+title 4: 0.07
+title 35: 0.07
+title 50: 0.07
+title 8: 0.07
+title 41: 0.07
+title 88: 0.07
+title 84: 0.06
+title 13: 0.06
+title 71: 0.06
+title 38: 0.06
+title 24: 0.06
+title 64: 0.06
+title 43: 0.06
+title 23: 0.06
+title 79: 0.06
+title 15: 0.05
+title 6: 0.05
+title 61: 0.05
+title 54: 0.05
+title 37: 0.05
+title 25: 0.05
+title 86: 0.05
+title 40: 0.05
+title 62: 0.05
+title 20: 0.05
+title 18: 0.05
+title 17: 0.05
+title 95: 0.05
+title 80: 0.04
+title 75: 0.04
+title 10: 0.04
+title 19: 0.04
+title 21: 0.04
+title 55: 0.04
+title 67: 0.04
+title 77: 0.04
+title 92: 0.04
+title 78: 0.04
+title 63: 0.04
+title 85: 0.03
+title 31: 0.03
+title 58: 0.03
+title 68: 0.03
+title 76: 0.03
+title 33: 0.03
+title 30: 0.03
+title 97: 0.03
+title 99: 0.03
+title 96: 0.03
+title 48: 0.03
+title 44: 0.03
+title 11: 0.03
+title 46: 0.03
+title 28: 0.03
+title 91: 0.02
+title 5: 0.02
+title 39: 0.02
+title 12: 0.02
+title 9: 0.01
+title 7: 0.01
+title 94: 0.01
+title 26: 0.01
+title 93: 0.01
+title 65: 0.01
+title 87: 0.01
+title 45: 0.01
+title 89: 0.0
+title 98: 0.0
+title 51: 0.0
+title 69: 0.0
+agent name:  PointWiseModelAgent
+user 0 / 1000
+Day 0, actual_reward: 80.0, max_reward: 197.09222771906127
+user 0 / 1000
+Day 1, actual_reward: 77.0, max_reward: 197.09222771906127
+user 0 / 1000
+Day 2, actual_reward: 71.0, max_reward: 197.09222771906127
+Epoch 0, data points: 5942, Loss per data point: 0.01829778680653734
+Epoch 10, data points: 5942, Loss per data point: 0.0063574995102002865
+Epoch 20, data points: 5942, Loss per data point: 0.005232769890601528
+Epoch 30, data points: 5942, Loss per data point: 0.004954526597744926
+Epoch 40, data points: 5942, Loss per data point: 0.004822184894395693
+Epoch 50, data points: 5942, Loss per data point: 0.004746188987980624
+Epoch 60, data points: 5942, Loss per data point: 0.004701966651157673
+Epoch 70, data points: 5942, Loss per data point: 0.004683432183364793
+Epoch 80, data points: 5942, Loss per data point: 0.004650689991901355
+Epoch 90, data points: 5942, Loss per data point: 0.0046337655040450225
+Training completed
+user 0 / 1000
+Day 3, actual_reward: 115.0, max_reward: 197.09222771906127
+Epoch 0, data points: 7868, Loss per data point: 0.0072435950988219
+Epoch 10, data points: 7868, Loss per data point: 0.00681112924174997
+Epoch 20, data points: 7868, Loss per data point: 0.006298364815740156
+Epoch 30, data points: 7868, Loss per data point: 0.005718204971681286
+Epoch 40, data points: 7868, Loss per data point: 0.005450223173887431
+Epoch 50, data points: 7868, Loss per data point: 0.005339389845887961
+Epoch 60, data points: 7868, Loss per data point: 0.005281464343044924
+Epoch 70, data points: 7868, Loss per data point: 0.005249904132489329
+Epoch 80, data points: 7868, Loss per data point: 0.005235217353513717
+Epoch 90, data points: 7868, Loss per data point: 0.005219547193540979
+Training completed
+user 0 / 1000
+Day 4, actual_reward: 66.0, max_reward: 197.09222771906127
+Epoch 0, data points: 9827, Loss per data point: 0.005707394531093537
+Epoch 10, data points: 9827, Loss per data point: 0.005313347492465971
+Epoch 20, data points: 9827, Loss per data point: 0.005165574839220195
+Epoch 30, data points: 9827, Loss per data point: 0.005086305421867387
+Epoch 40, data points: 9827, Loss per data point: 0.005038947131212942
+Epoch 50, data points: 9827, Loss per data point: 0.005092216477630533
+Epoch 60, data points: 9827, Loss per data point: 0.004989307897281608
+Epoch 70, data points: 9827, Loss per data point: 0.004975633847546066
+Epoch 80, data points: 9827, Loss per data point: 0.004960502550450203
+Epoch 90, data points: 9827, Loss per data point: 0.004952505777926512
+Training completed
+user 0 / 1000
+Day 5, actual_reward: 168.0, max_reward: 197.09222771906127
+Epoch 0, data points: 11785, Loss per data point: 0.005701554701914462
+Epoch 10, data points: 11785, Loss per data point: 0.005671589169769809
+Epoch 20, data points: 11785, Loss per data point: 0.005666488545599457
+Epoch 30, data points: 11785, Loss per data point: 0.005639098893485941
+Epoch 40, data points: 11785, Loss per data point: 0.005630207579862682
+Epoch 50, data points: 11785, Loss per data point: 0.005621823548360249
+Epoch 60, data points: 11785, Loss per data point: 0.005655750610790973
+Epoch 70, data points: 11785, Loss per data point: 0.005611156234434716
+Epoch 80, data points: 11785, Loss per data point: 0.005607240523480742
+Epoch 90, data points: 11785, Loss per data point: 0.005603558971599143
+Training completed
+user 0 / 1000

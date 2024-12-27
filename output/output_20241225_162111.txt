@@ -1,0 +1,119 @@
+title 68: 0.1
+title 15: 0.1
+title 66: 0.1
+title 63: 0.1
+title 93: 0.09
+title 19: 0.09
+title 42: 0.09
+title 28: 0.09
+title 85: 0.09
+title 11: 0.09
+title 7: 0.09
+title 32: 0.09
+title 95: 0.09
+title 62: 0.09
+title 61: 0.09
+title 92: 0.09
+title 84: 0.09
+title 24: 0.09
+title 80: 0.09
+title 89: 0.08
+title 51: 0.08
+title 2: 0.08
+title 34: 0.08
+title 3: 0.08
+title 16: 0.08
+title 58: 0.08
+title 77: 0.08
+title 60: 0.08
+title 37: 0.08
+title 44: 0.08
+title 97: 0.07
+title 17: 0.07
+title 64: 0.07
+title 25: 0.07
+title 6: 0.07
+title 21: 0.07
+title 4: 0.07
+title 90: 0.07
+title 74: 0.07
+title 12: 0.07
+title 49: 0.06
+title 23: 0.06
+title 78: 0.06
+title 82: 0.06
+title 71: 0.06
+title 27: 0.06
+title 98: 0.06
+title 40: 0.06
+title 53: 0.06
+title 99: 0.05
+title 30: 0.05
+title 29: 0.05
+title 1: 0.05
+title 46: 0.05
+title 18: 0.05
+title 57: 0.05
+title 14: 0.04
+title 70: 0.04
+title 50: 0.04
+title 38: 0.04
+title 79: 0.04
+title 72: 0.04
+title 55: 0.04
+title 20: 0.04
+title 87: 0.04
+title 5: 0.04
+title 45: 0.03
+title 8: 0.03
+title 59: 0.03
+title 81: 0.03
+title 39: 0.03
+title 47: 0.03
+title 0: 0.03
+title 13: 0.03
+title 22: 0.03
+title 73: 0.03
+title 56: 0.03
+title 86: 0.03
+title 76: 0.02
+title 65: 0.02
+title 54: 0.02
+title 9: 0.02
+title 31: 0.02
+title 94: 0.02
+title 35: 0.02
+title 26: 0.02
+title 83: 0.02
+title 52: 0.02
+title 75: 0.02
+title 69: 0.01
+title 41: 0.01
+title 36: 0.01
+title 10: 0.01
+title 91: 0.01
+title 43: 0.01
+title 33: 0.0
+title 48: 0.0
+title 67: 0.0
+title 88: 0.0
+title 96: 0.0
+agent name:  PointWiseModelAgent
+user 0 / 1000
+Day 0, actual_reward: 90.0, max_reward: 194.71474550699406
+user 0 / 1000
+Day 1, actual_reward: 72.0, max_reward: 194.71474550699406
+user 0 / 1000
+Day 2, actual_reward: 59.0, max_reward: 194.71474550699406
+Epoch 0, data points: 6087, Loss per data point: 0.022625811859483064
+Epoch 10, data points: 6087, Loss per data point: 0.011704262066341805
+Epoch 20, data points: 6087, Loss per data point: 0.007106606451497987
+Epoch 30, data points: 6087, Loss per data point: 0.005543710923711909
+Epoch 40, data points: 6087, Loss per data point: 0.00501598925908857
+Epoch 50, data points: 6087, Loss per data point: 0.004799550214051926
+Epoch 60, data points: 6087, Loss per data point: 0.004689310067330986
+Epoch 70, data points: 6087, Loss per data point: 0.004627468375021236
+Epoch 80, data points: 6087, Loss per data point: 0.004575412648224921
+Epoch 90, data points: 6087, Loss per data point: 0.004547221236957868
+Training completed
+user 0 / 1000

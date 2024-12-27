@@ -227,10 +227,10 @@ class BanditAgent(Agent):
 
     def understand_agent(self):
         print("agent name: ", self.__class__.__name__)
-        print("click_counts: ", self.click_counts)
-        print("seen_counts: ", self.seen_counts)
+        print("click_counts: ", self.click_counts[0:10])
+        print("seen_counts: ", self.seen_counts[0:10])
         click_probabilities = self.click_counts / self.seen_counts
-        print("click_probabilities: ", click_probabilities)
+        print("click_probabilities: ", click_probabilities[0:10])
 
     def day_starts(self):
         pass
@@ -301,8 +301,8 @@ class BucketSortingAgent(Agent):
     def understand_agent(self):
         print("agent name: ", self.__class__.__name__)
         print("bucket_size: ", self.bucket_size)
-        print("click_counts: ", self.click_counts)
-        print("click_through_rates: ", self.click_through_rates)
+        print("click_counts: ", self.click_counts[0:10])
+        print("click_through_rates: ", self.click_through_rates[0:10])
 
     def day_starts(self):
         pass
