@@ -21,3 +21,5 @@ python bandit_vs_learning_to_rank/agent.py
 ```bash
 python bandit_vs_learning_to_rank/visualize.py
 ```
+
+![all_agents](../plots/all_agents.png)
