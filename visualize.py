@@ -48,5 +48,7 @@ if __name__ == "__main__":
     if not os.path.exists("plots"):
         os.makedirs("plots")
     plt.savefig(f"plots/all_agents.pdf")
+    # set the image quality to high
+    plt.savefig(f"plots/all_agents.png", dpi=300) 
     plt.show()
     plt.close()

@@ -181,10 +181,10 @@ if __name__ == "__main__":
         print("Pairwise Hinge Loss:", loss)
 
     def test_tweedie_loss():
-        y_pred = torch.tensor([0.1, 0.2, 0.3], dtype=torch.float32)
-        y_true = torch.tensor([1.0, 2.0, 3.0], dtype=torch.float32)
+        y_true = torch.tensor([0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 2.0, 2.0, 2.0], dtype=torch.float32)
+        y_pred = torch.tensor([0.0, 1.0, 2.0, 0.0, 1.0, 2.0, 0.0, 1.0, 2.0], dtype=torch.float32)
         loss_fn = TweedieLoss(p=1.5)
-        loss = loss_fn.loss(y_pred, y_true)
+        loss = loss_fn(y_pred, y_true)
         print("Tweedie Loss:", loss)
 
     test_pairwise_hinge_loss()

@@ -1,9 +1,4 @@
 import numpy as np
-import torch
-import torch.nn as nn
-from loss import PairwiseHingeLoss
-
-from model import PointWiseModel, PairWiseModel
 
 class RecommenderEnv:
     
@@ -25,8 +20,9 @@ class RecommenderEnv:
             np.random.seed(random_seed)
             
         if click_probabilities is None:
-            # Generate random click probabilities between 0 and 0.1
-            self.click_probabilities = np.random.random(num_titles) * 0.1
+            # Generate random click probabilities using a normal distribution
+            self.click_probabilities = np.clip(np.random.normal(0.1, 0.01, self.num_titles), 0, 1)
+
         else:
             if len(click_probabilities) != num_titles:
                 raise ValueError("Length of click_probabilities must match num_titles")
@@ -61,8 +57,6 @@ class RecommenderEnv:
         # set up finish intentation probability for each title
         self.finish_intention_probability = np.random.normal(0.5, 0.1, self.num_titles)
         self.finish_intention_probability = np.clip(self.finish_intention_probability, 0, 1)
-
-
 
     def get_title_list(self):
         return list(range(self.num_titles))
@@ -184,5 +178,48 @@ class RecommenderEnv:
 
 
 
+    def understand_env(self):
+        """
+        This function will print the click probabilities and the expected watch duration for each title
+        """
 
+        # collect the click probabilities into bins and print the number of titles in each bin
+        bins = np.linspace(0, 0.2, 20)
+        bin_indices = np.digitize(self.click_probabilities, bins)
+        bin_counts = np.bincount(bin_indices)
+        print(bin_counts)
+        
+        # do the same for the title duration
+        bins = np.linspace(0, 1000, 100)
+        bin_indices = np.digitize(self.title_duration, bins)
+        bin_counts = np.bincount(bin_indices)
+        print(bin_counts)
+
+
+
+if __name__ == "__main__":
+    title_size = 10000
+    env = RecommenderEnv(num_titles=title_size)
+    env.understand_env()
+
+    # print the maximum expected reward
+    max_rewards_when_clicks_maximized, max_rewards_when_watch_duration_maximized = env.get_maximum_expected_reward()
+    print(f"Maximum expected reward when clicks are maximized: {max_rewards_when_clicks_maximized}")
+    print(f"Maximum expected reward when watch duration is maximized: {max_rewards_when_watch_duration_maximized}")
+
+    # print the manual edit ranking
+    manual_edit_ranking = env.manual_edit_ranking()
+    print(f"Manual edit ranking: {manual_edit_ranking}")
+
+    # print the expected clicks and watch duration reward for the manual edit ranking
+    expected_clicks_list = []
+    expected_watch_duration_list = []
+    for _ in range(1000):
+        feedback = env.get_user_feedback(manual_edit_ranking)
+        expected_clicks = np.sum([1 for action, _ in feedback if action == "CLICK"])    
+        expected_watch_duration = np.sum([watch_duration for _, watch_duration in feedback])
+        expected_clicks_list.append(expected_clicks)
+        expected_watch_duration_list.append(expected_watch_duration)
+    print(f"Expected clicks: {np.mean(expected_clicks_list)}")
+    print(f"Expected watch duration: {np.mean(expected_watch_duration_list)}")
 
