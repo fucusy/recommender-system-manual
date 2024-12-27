@@ -1,10 +1,10 @@
 import numpy as np
 import torch
 import torch.nn as nn
-from loss import PairwiseHingeLoss
-from env import Agent, RecommenderEnv, BanditAgent, BucketSortingAgent, PointWiseModel, PointWiseModelAgent, PairWiseModelAgent, PairWiseModel
-
-
+from loss import PairwiseHingeLoss, TweedieLoss
+from env import RecommenderEnv
+from agent import Agent, BanditAgent, BucketSortingAgent, PointWiseModelAgent, PairWiseModelAgent
+from model import PointWiseModel, PairWiseModel
 
 class BucketSortingWatchTimeAgent(Agent):
     """
@@ -65,25 +65,6 @@ class BucketSortingWatchTimeAgent(Agent):
                     self.seen_counts[title_id] += 1
                 self.watch_time_per_seen[title_id] = self.watch_times[title_id] / self.seen_counts[title_id]
         
-
-class PointWiseModel(nn.Module):
-    def __init__(self, num_titles):
-        self.embedding_dim = 16
-        self.hidden_dim = 8
-        super(PointWiseModel, self).__init__()
-
-        self.embedding_layer = nn.Embedding(num_titles, self.embedding_dim)
-        self.linear1 = nn.Linear(self.embedding_dim, self.hidden_dim)
-        self.linear2 = nn.Linear(self.hidden_dim, 1)
-
-    def forward(self, title_ids):
-        # Get embeddings for title ids
-        embeddings = self.embedding_layer(title_ids)
-        # Forward pass through the network
-        h = torch.relu(self.linear1(embeddings))
-        score = self.linear2(h)
-        batch_size = title_ids.shape[0]
-        return score.view(batch_size)
 
 class PointWiseModelAgent(Agent):
     def __init__(self, num_titles):
@@ -155,25 +136,6 @@ class PointWiseModelAgent(Agent):
                 print(f"Epoch {epoch}, data points: {data_size}, Loss per data point: {epoch_loss / data_size}")
 
         print("Training completed")
-
-
-class PairWiseModel(nn.Module):
-    def __init__(self, num_titles):
-        self.embedding_dim = 16
-        self.hidden_dim = 8
-        super(PairWiseModel, self).__init__()
-
-        self.embedding_layer = nn.Embedding(num_titles, self.embedding_dim)
-        self.linear1 = nn.Linear(self.embedding_dim, self.hidden_dim)
-        self.linear2 = nn.Linear(self.hidden_dim, 1)
-
-    def forward(self, title_ids):
-        # Get embeddings for title ids
-        embeddings = self.embedding_layer(title_ids)
-        # Forward pass through the network
-        h = torch.relu(self.linear1(embeddings))
-        score = self.linear2(h)
-        return score
 
 
 class PairWiseModelAgent(Agent):
@@ -253,8 +215,6 @@ class PairWiseModelAgent(Agent):
                 print(f"Epoch {epoch}, data points: {data_size}, Loss per data point: {epoch_loss / data_size}")
 
         print("Training completed")
-
-
 
 
 class WeightedPointWiseModelAgent(Agent):
@@ -419,6 +379,78 @@ class WeightedPairWiseModelAgent(Agent):
 
         print("Training completed")
 
+
+
+class TweedieModelAgent(Agent):
+    def __init__(self, num_titles):
+        self.num_titles = num_titles        
+        self.model = PointWiseModel(num_titles)
+        self.valid_title_ids = [] # each element is a title id
+        self.valid_watch_duration = [] # each element is a watch duration
+
+    def make_ranking(self):
+        # Get scores for all titles
+        scores = self.model(torch.arange(self.num_titles))
+        # Return titles sorted by their scores (highest first)
+        return torch.argsort(scores, descending=True)
+
+    def collect_user_feedback(self, title_ids, user_feedback): 
+        for title_id, feedback_tuple in zip(title_ids, user_feedback):
+            feedback, watch_duration = feedback_tuple
+            if feedback != "NOT_SEEN":
+                self.valid_title_ids.append(title_id)
+                self.valid_watch_duration.append(watch_duration)
+            else:
+                break
+    
+    def understand_agent(self):
+        print("agent name: ", self.__class__.__name__)
+        print("model parameters: ", self.model.parameters())
+
+    def day_starts(self):
+        if len(self.valid_title_ids) > 0:
+            self.train()
+
+    def train(self):
+        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.001)
+        # using Sigmoid Cross Entropy Loss first
+        criterion = TweedieLoss(p=1.5)
+
+        class UserFeedbackDataset(torch.utils.data.Dataset):
+            def __init__(self, valid_title_ids, valid_watch_duration):
+                self.valid_title_ids = valid_title_ids
+                self.valid_watch_duration = valid_watch_duration
+
+            def __len__(self):
+                return len(self.valid_title_ids)
+
+            def __getitem__(self, idx):
+                title_ids = self.valid_title_ids[idx]
+                watch_duration = self.valid_watch_duration[idx]
+                # Convert "SKIP" to 0 and "CLICK" to 1
+                return torch.tensor(title_ids, dtype=torch.long), torch.tensor(watch_duration, dtype=torch.float32)
+
+        dataset = UserFeedbackDataset(self.valid_title_ids, self.valid_watch_duration)
+        dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
+
+        for epoch in range(100):
+            epoch_loss = 0.0
+            data_size = 0
+            for title_ids, watch_duration in dataloader:
+                optimizer.zero_grad()
+                outputs = self.model(title_ids)
+                loss = criterion(outputs, watch_duration)
+                loss = loss.mean()
+                loss.backward()
+                optimizer.step()
+                epoch_loss += loss.item()
+                data_size += len(title_ids)
+            if epoch % 10 == 0:
+                print(f"Epoch {epoch}, data points: {data_size}, Loss per data point: {epoch_loss / data_size}")
+
+        print("Training completed")
+
+
 if __name__ == "__main__":
     title_size = 1000
     user_size = 10 * title_size
@@ -441,7 +473,10 @@ if __name__ == "__main__":
     weighted_pointwise_agent = WeightedPointWiseModelAgent(num_titles=title_size)
     weighted_pairwise_agent = WeightedPairWiseModelAgent(num_titles=title_size)
     pairwise_agent = PairWiseModelAgent(num_titles=title_size)
-    agents = [weighted_pairwise_agent, pairwise_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent]
+    tweedie_agent = TweedieModelAgent(num_titles=title_size)
+
+    # agents = [weighted_pairwise_agent, pairwise_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent]
+    agents = [tweedie_agent, weighted_pointwise_agent, pointwise_agent]
 
     # sort by probability, print the title id and value
     sorted_probabilities = sorted(enumerate(env.click_probabilities), key=lambda x: x[1], reverse=True)
@@ -534,8 +569,3 @@ if __name__ == "__main__":
     
     end_time = time.time()
     print("Time taken: ", end_time - start_time)
-
-
-
-
-

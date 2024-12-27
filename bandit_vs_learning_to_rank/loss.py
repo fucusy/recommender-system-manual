@@ -1,6 +1,6 @@
-import torch as _torch
+import torch
 
-def batch_pairs(x: _torch.Tensor) -> _torch.Tensor:
+def batch_pairs(x: torch.Tensor) -> torch.Tensor:
     """Returns a pair matrix
 
     This matrix contains all pairs (i, j) as follows:
@@ -20,15 +20,15 @@ def batch_pairs(x: _torch.Tensor) -> _torch.Tensor:
         x = x.reshape((x.shape[0], x.shape[1], 1))
 
     # Construct broadcasted x_{:,i,0...list_size}
-    x_ij = _torch.repeat_interleave(x, x.shape[1], dim=2)
+    x_ij = torch.repeat_interleave(x, x.shape[1], dim=2)
 
     # Construct broadcasted x_{:,0...list_size,i}
-    x_ji = _torch.repeat_interleave(x.permute(0, 2, 1), x.shape[1], dim=1)
+    x_ji = torch.repeat_interleave(x.permute(0, 2, 1), x.shape[1], dim=1)
 
-    return _torch.stack([x_ij, x_ji], dim=3)
+    return torch.stack([x_ij, x_ji], dim=3)
 
 
-class _PairwiseAdditiveLoss(_torch.nn.Module):
+class _PairwiseAdditiveLoss(torch.nn.Module):
     """Pairwise additive ranking losses.
 
     Implementation of linearly decomposible additive pairwise ranking losses.
@@ -38,8 +38,8 @@ class _PairwiseAdditiveLoss(_torch.nn.Module):
         r""""""
         super().__init__()
 
-    def _loss_per_doc_pair(self, score_pairs: _torch.FloatTensor,
-                           rel_pairs: _torch.LongTensor) -> _torch.FloatTensor:
+    def _loss_per_doc_pair(self, score_pairs: torch.FloatTensor,
+                           rel_pairs: torch.LongTensor) -> torch.FloatTensor:
         """Computes a loss on given score pairs and relevance pairs.
 
         Args:
@@ -57,7 +57,7 @@ class _PairwiseAdditiveLoss(_torch.nn.Module):
         raise NotImplementedError
 
     def _loss_reduction(self,
-                        loss_pairs: _torch.FloatTensor) -> _torch.FloatTensor:
+                        loss_pairs: torch.FloatTensor) -> torch.FloatTensor:
         """Reduces the paired loss to a per sample loss.
 
         Args:
@@ -70,12 +70,12 @@ class _PairwiseAdditiveLoss(_torch.nn.Module):
         """
         return loss_pairs.view(loss_pairs.shape[0], -1).sum(1)
 
-    def _loss_modifier(self, loss: _torch.FloatTensor) -> _torch.FloatTensor:
+    def _loss_modifier(self, loss: torch.FloatTensor) -> torch.FloatTensor:
         """A modifier to apply to the loss."""
         return loss
 
-    def forward(self, scores: _torch.FloatTensor, relevance: _torch.LongTensor,
-                n: _torch.LongTensor) -> _torch.FloatTensor:
+    def forward(self, scores: torch.FloatTensor, relevance: torch.LongTensor,
+                n: torch.LongTensor) -> torch.FloatTensor:
         """Computes the loss for given batch of samples.
 
         Args:
@@ -100,9 +100,9 @@ class _PairwiseAdditiveLoss(_torch.nn.Module):
         # Mask out padded documents per query in the batch
         n_grid = n[:, None, None].repeat(1, score_pairs.shape[1],
                                          score_pairs.shape[2])
-        arange = _torch.arange(score_pairs.shape[1],
+        arange = torch.arange(score_pairs.shape[1],
                                device=score_pairs.device)
-        range_grid = _torch.max(*_torch.meshgrid([arange, arange]))
+        range_grid = torch.max(*torch.meshgrid([arange, arange]))
         range_grid = range_grid[None, :, :].repeat(n.shape[0], 1, 1)
         loss_pairs[n_grid <= range_grid] = 0.0
 
@@ -138,6 +138,35 @@ class PairwiseHingeLoss(_PairwiseAdditiveLoss):
         loss[loss < 0.0] = 0.0
         return loss
 
+
+
+class TweedieLoss(torch.nn.Module):
+    """
+    Tweedie loss.
+
+    Tweedie regression with log-link. It might be useful, e.g., for modeling total
+    loss in insurance, or for any target that might be tweedie-distributed.
+    """
+
+    def __init__(self, p: float = 1.5):
+        """
+        Args:
+            p (float, optional): tweedie variance power which is greater equal
+                1.0 and smaller 2.0. Close to ``2`` shifts to
+                Gamma distribution and close to ``1`` shifts to Poisson distribution.
+                Defaults to 1.5.
+            reduction (str, optional): How to reduce the loss. Defaults to "mean".
+        """
+        super().__init__()
+        assert 1 <= p < 2, "p must be in range [1, 2]"
+        self.p = p
+
+    def forward(self, y_pred, y_true):
+        a = y_true * torch.exp(y_pred * (1 - self.p)) / (1 - self.p)
+        b = torch.exp(y_pred * (2 - self.p)) / (2 - self.p)
+        loss = -a + b
+        return loss
+
 if __name__ == "__main__":
     import torch
 
@@ -148,7 +177,15 @@ if __name__ == "__main__":
         n = torch.tensor([3], dtype=torch.int32)
 
         loss_fn = PairwiseHingeLoss()
-        loss = loss_fn(scores, relevance, n).sum()
+        loss = loss_fn(scores, relevance, n)
         print("Pairwise Hinge Loss:", loss)
 
+    def test_tweedie_loss():
+        y_pred = torch.tensor([0.1, 0.2, 0.3], dtype=torch.float32)
+        y_true = torch.tensor([1.0, 2.0, 3.0], dtype=torch.float32)
+        loss_fn = TweedieLoss(p=1.5)
+        loss = loss_fn.loss(y_pred, y_true)
+        print("Tweedie Loss:", loss)
+
     test_pairwise_hinge_loss()
+    test_tweedie_loss()
