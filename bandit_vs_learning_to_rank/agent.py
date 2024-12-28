@@ -151,8 +151,8 @@ class PointWiseModelAgent(Agent):
     def __init__(self, num_titles):
         self.num_titles = num_titles        
         self.model = PointWiseModel(num_titles)
-        self.valid_title_ids = [] # each element is a title id
-        self.valid_user_feedback = [] # each element is a user feedback, 1 for CLICK, 0 for SKIP
+        self.valid_title_ids_tensor = [] # each element is a title id
+        self.valid_user_feedback_tensor = [] # each element is a user feedback, 1 for CLICK, 0 for SKIP
 
     def make_ranking(self):
         # Get scores for all titles
@@ -164,11 +164,11 @@ class PointWiseModelAgent(Agent):
         clean_user_feedback = [feedback for feedback, _ in user_feedback]
         for title_id, feedback in zip(title_ids, clean_user_feedback):
             if feedback != "NOT_SEEN":
-                self.valid_title_ids.append(title_id)
+                self.valid_title_ids_tensor.append(torch.tensor(title_id, dtype=torch.long))
                 if feedback == "CLICK":
-                    self.valid_user_feedback.append(1)
+                    self.valid_user_feedback_tensor.append(torch.tensor(1, dtype=torch.float32))
                 else:
-                    self.valid_user_feedback.append(0)
+                    self.valid_user_feedback_tensor.append(torch.tensor(0, dtype=torch.float32))
             else:
                 break
     
@@ -177,7 +177,7 @@ class PointWiseModelAgent(Agent):
         print("model parameters: ", self.model.parameters())
 
     def day_starts(self):
-        if len(self.valid_title_ids) > 0:
+        if len(self.valid_title_ids_tensor) > 0:
             self.train()
 
     def train(self):
@@ -186,33 +186,32 @@ class PointWiseModelAgent(Agent):
         criterion = nn.BCEWithLogitsLoss()
 
         class UserFeedbackDataset(torch.utils.data.Dataset):
-            def __init__(self, valid_title_ids, valid_user_feedback):
-                self.valid_title_ids = valid_title_ids
-                self.valid_user_feedback = valid_user_feedback
+            def __init__(self, valid_title_ids_tensor, valid_user_feedback_tensor):
+                self.valid_title_ids_tensor = valid_title_ids_tensor
+                self.valid_user_feedback_tensor = valid_user_feedback_tensor
 
             def __len__(self):
-                return len(self.valid_title_ids)
+                return len(self.valid_title_ids_tensor)
 
             def __getitem__(self, idx):
-                title_ids = self.valid_title_ids[idx]
-                user_feedback = self.valid_user_feedback[idx]
-                # Convert "SKIP" to 0 and "CLICK" to 1
-                return torch.tensor(title_ids, dtype=torch.long), torch.tensor(user_feedback, dtype=torch.float32)
+                title_id = self.valid_title_ids_tensor[idx]
+                user_feedback = self.valid_user_feedback_tensor[idx]
+                return title_id, user_feedback
 
-        dataset = UserFeedbackDataset(self.valid_title_ids, self.valid_user_feedback)
+        dataset = UserFeedbackDataset(self.valid_title_ids_tensor, self.valid_user_feedback_tensor)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
         for epoch in range(100):
             epoch_loss = 0.0
             data_size = 0
-            for title_ids, user_feedback in dataloader:
+            for title_id, user_feedback in dataloader:
                 optimizer.zero_grad()
-                outputs = self.model(title_ids)
+                outputs = self.model(title_id)
                 loss = criterion(outputs, user_feedback)
                 loss.backward()
                 optimizer.step()
                 epoch_loss += loss.item()
-                data_size += len(title_ids)
+                data_size += len(title_id)
             if epoch % 10 == 0:
                 print(f"Epoch {epoch}, data points: {data_size}, Loss per data point: {epoch_loss / data_size}")
 
