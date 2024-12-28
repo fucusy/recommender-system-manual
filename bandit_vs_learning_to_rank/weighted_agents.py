@@ -389,24 +389,28 @@ class TweedieModelAgent(Agent):
             self.device = torch.device("mps")
         else:
             self.device = torch.device("cpu")
+        self.device = torch.device("cpu")
         print("Using device: ", self.device)
         self.num_titles = num_titles        
         self.model = PointWiseModel(num_titles).to(self.device)
-        self.valid_title_ids = [] # each element is a title id
-        self.valid_watch_duration = [] # each element is a watch duration
+        self.valid_title_ids_tensor = [] # each element is a title id
+        self.valid_watch_duration_tensor = [] # each element is a watch duration
 
     def make_ranking(self):
         # Get scores for all titles
-        scores = self.model(torch.arange(self.num_titles))
+        scores = self.model(torch.arange(self.num_titles, device=self.device))
         # Return titles sorted by their scores (highest first)
         return torch.argsort(scores, descending=True)
 
     def collect_user_feedback(self, title_ids, user_feedback): 
         for title_id, feedback_tuple in zip(title_ids, user_feedback):
             feedback, watch_duration = feedback_tuple
+
+            title_id_tensor = torch.tensor(title_id, dtype=torch.long, device=self.device)
+            watch_duration_tensor = torch.tensor(watch_duration, dtype=torch.float32, device=self.device)
             if feedback != "NOT_SEEN":
-                self.valid_title_ids.append(title_id)
-                self.valid_watch_duration.append(watch_duration)
+                self.valid_title_ids_tensor.append(title_id_tensor)
+                self.valid_watch_duration_tensor.append(watch_duration_tensor)
             else:
                 break
     
@@ -415,7 +419,7 @@ class TweedieModelAgent(Agent):
         print("model parameters: ", self.model.parameters())
 
     def day_starts(self):
-        if len(self.valid_title_ids) > 0:
+        if len(self.valid_title_ids_tensor) > 0:
             self.train()
 
     def train(self):
@@ -436,9 +440,9 @@ class TweedieModelAgent(Agent):
                 title_ids = self.valid_title_ids[idx]
                 watch_duration = self.valid_watch_duration[idx]
                 # Convert "SKIP" to 0 and "CLICK" to 1
-                return torch.tensor(title_ids, dtype=torch.long, device=self.device), torch.tensor(watch_duration, dtype=torch.float32, device=self.device)
+                return title_ids, watch_duration
 
-        dataset = UserFeedbackDataset(self.valid_title_ids, self.valid_watch_duration, self.device)
+        dataset = UserFeedbackDataset(self.valid_title_ids_tensor, self.valid_watch_duration_tensor, self.device)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
         for epoch in range(100):
