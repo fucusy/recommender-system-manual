@@ -189,3 +189,7 @@ if __name__ == "__main__":
 
     test_pairwise_hinge_loss()
     test_tweedie_loss()
+    """
+    Pairwise Hinge Loss: tensor([2.6000])
+    Tweedie Loss: tensor([2.0000, 3.2974, 5.4366, 4.0000, 4.5105, 6.1723, 6.0000, 5.7236, 6.9081])
+    """
