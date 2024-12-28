@@ -6,13 +6,12 @@ if __name__ == "__main__":
     import pandas as pd
     files = os.listdir("logged_data")
     files.sort()
-    logged_data_df = []
-    for file in files:
-        logged_data_df.append(pd.read_json(f"logged_data/{file}"))
-    print(logged_data_df)
 
     last_n = 10
-    selected_logged_data_dfs = logged_data_df[-last_n:]
+    selected_logged_data_dfs = []
+    for file in files[-last_n:]:
+        selected_logged_data_dfs.append(pd.read_json(f"logged_data/{file}"))
+    print(selected_logged_data_dfs)
 
 
     import matplotlib.pyplot as plt
