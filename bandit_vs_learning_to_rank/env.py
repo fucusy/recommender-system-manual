@@ -72,19 +72,21 @@ class RecommenderEnv:
         """
         if not 0 <= title_id < self.num_titles:
             raise ValueError(f"Title ID must be between 0 and {self.num_titles-1}")
-        
-        if np.random.random() < self.finish_intention_probability[title_id]:
-            # the user has intention to finish the title
-            completion_rate = np.random.normal(self.completion_rate_mean_with_intention[title_id], self.completion_rate_std_with_intention[title_id])
-            completion_rate = np.clip(completion_rate, 0, 1)
-            watch_duration_minutes = self.title_duration[title_id] * completion_rate
-        else:
-            # the user has no intention to finish the title
-            completion_rate = np.random.normal(self.completion_rate_mean_without_intention[title_id], self.completion_rate_std_without_intention[title_id])
-            completion_rate = np.clip(completion_rate, 0, 1)
-            watch_duration_minutes = self.title_duration[title_id] * completion_rate
-        
         clicked = np.random.random() < self.click_probabilities[title_id]
+        if clicked:
+            if np.random.random() < self.finish_intention_probability[title_id]:
+                # the user has intention to finish the title
+                completion_rate = np.random.normal(self.completion_rate_mean_with_intention[title_id], self.completion_rate_std_with_intention[title_id])
+                completion_rate = np.clip(completion_rate, 0, 1)
+                watch_duration_minutes = self.title_duration[title_id] * completion_rate
+            else:
+                # the user has no intention to finish the title
+                completion_rate = np.random.normal(self.completion_rate_mean_without_intention[title_id], self.completion_rate_std_without_intention[title_id])
+                completion_rate = np.clip(completion_rate, 0, 1)
+                watch_duration_minutes = self.title_duration[title_id] * completion_rate
+        else:
+            watch_duration_minutes = 0
+            
 
         return clicked, watch_duration_minutes
 
@@ -104,7 +106,7 @@ class RecommenderEnv:
             if clicked:
                 feedback.append(("CLICK", watch_duration_minutes))
             else:
-                feedback.append(("SKIP", 0))
+                feedback.append(("SKIP", watch_duration_minutes))
             if np.random.random() < self.exit_probability:
                 break
         feedback.extend([("NOT_SEEN", 0)] * (len(title_rankings) - len(feedback)))

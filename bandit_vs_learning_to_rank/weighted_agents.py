@@ -304,7 +304,7 @@ class TweedieModelAgent(Agent):
 
 
 if __name__ == "__main__":
-    title_size = 10
+    title_size = 100
     user_size = 10 * title_size
     run_days = 10
 
@@ -328,7 +328,7 @@ if __name__ == "__main__":
     tweedie_agent = TweedieModelAgent(num_titles=title_size)
 
     # agents = [weighted_pairwise_agent, pairwise_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent]
-    agents = [tweedie_agent, weighted_pointwise_agent, pointwise_agent]
+    agents = [tweedie_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent, pairwise_agent, weighted_pairwise_agent]
 
     # sort by probability, print the title id and value
     sorted_probabilities = sorted(enumerate(env.click_probabilities), key=lambda x: x[1], reverse=True)

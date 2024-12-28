@@ -39,7 +39,8 @@ def run_single_command_in_parallel(command, repetitions, max_workers=4):
 
 if __name__ == "__main__":
     # List of commands to run
-    command = f"""python bandit_vs_learning_to_rank/weighted_agents.py | tee 'output/output_$(date +%Y%m%d_%H%M%S).txt'"""
+    # generate a filename with current date,
+    command = f"""python bandit_vs_learning_to_rank/weighted_agents.py | tee 'output/output_$(date +%Y%m%d_%H%M%S)_$(RANDOM).txt'"""
     # Run commands in parallel
     cpu_count = os.cpu_count()
     max_workers = cpu_count
