@@ -383,8 +383,15 @@ class WeightedPairWiseModelAgent(Agent):
 
 class TweedieModelAgent(Agent):
     def __init__(self, num_titles):
+        if torch.cuda.is_available():
+            self.device = torch.device("cuda")
+        elif torch.backends.mps.is_available():
+            self.device = torch.device("mps")
+        else:
+            self.device = torch.device("cpu")
+        print("Using device: ", self.device)
         self.num_titles = num_titles        
-        self.model = PointWiseModel(num_titles)
+        self.model = PointWiseModel(num_titles).to(self.device)
         self.valid_title_ids = [] # each element is a title id
         self.valid_watch_duration = [] # each element is a watch duration
 
@@ -417,9 +424,10 @@ class TweedieModelAgent(Agent):
         criterion = TweedieLoss(p=1.5)
 
         class UserFeedbackDataset(torch.utils.data.Dataset):
-            def __init__(self, valid_title_ids, valid_watch_duration):
+            def __init__(self, valid_title_ids, valid_watch_duration, device):
                 self.valid_title_ids = valid_title_ids
                 self.valid_watch_duration = valid_watch_duration
+                self.device = device
 
             def __len__(self):
                 return len(self.valid_title_ids)
@@ -428,9 +436,9 @@ class TweedieModelAgent(Agent):
                 title_ids = self.valid_title_ids[idx]
                 watch_duration = self.valid_watch_duration[idx]
                 # Convert "SKIP" to 0 and "CLICK" to 1
-                return torch.tensor(title_ids, dtype=torch.long), torch.tensor(watch_duration, dtype=torch.float32)
+                return torch.tensor(title_ids, dtype=torch.long, device=self.device), torch.tensor(watch_duration, dtype=torch.float32, device=self.device)
 
-        dataset = UserFeedbackDataset(self.valid_title_ids, self.valid_watch_duration)
+        dataset = UserFeedbackDataset(self.valid_title_ids, self.valid_watch_duration, self.device)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
         for epoch in range(100):
@@ -477,6 +485,7 @@ if __name__ == "__main__":
 
     # agents = [weighted_pairwise_agent, pairwise_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent]
     agents = [tweedie_agent, weighted_pointwise_agent, pointwise_agent]
+    agents = [tweedie_agent]
 
     # sort by probability, print the title id and value
     sorted_probabilities = sorted(enumerate(env.click_probabilities), key=lambda x: x[1], reverse=True)
