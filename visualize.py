@@ -11,7 +11,7 @@ if __name__ == "__main__":
         logged_data_df.append(pd.read_json(f"logged_data/{file}"))
     print(logged_data_df)
 
-    last_n = 1
+    last_n = 10
     selected_logged_data_dfs = logged_data_df[-last_n:]
 
 

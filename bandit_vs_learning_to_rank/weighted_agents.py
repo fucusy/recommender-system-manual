@@ -452,7 +452,7 @@ class TweedieModelAgent(Agent):
 
 
 if __name__ == "__main__":
-    title_size = 1000
+    title_size = 100
     user_size = 10 * title_size
     run_days = 10
 
@@ -564,7 +564,9 @@ if __name__ == "__main__":
     import os
     if not os.path.exists("logged_data"):
         os.makedirs("logged_data")
-    df.to_json(f"logged_data/logged_data_{timestamp}.json", index=False)
+    import random
+    random_seed = random.randint(0, 100000000)
+    df.to_json(f"logged_data/logged_data_{timestamp}_{random_seed}.json", index=False)
     
     
     end_time = time.time()
