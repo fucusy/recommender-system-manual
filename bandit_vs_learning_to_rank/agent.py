@@ -4,6 +4,8 @@ import torch.nn as nn
 from env import RecommenderEnv
 from model import PointWiseModel, PairWiseModel
 from loss import PairwiseHingeLoss
+from config import optimization_epochs
+
 class Agent:
     def __init__(self, num_titles):
         self.num_titles = num_titles
@@ -201,7 +203,7 @@ class PointWiseModelAgent(Agent):
         dataset = UserFeedbackDataset(self.valid_title_ids_tensor, self.valid_user_feedback_tensor)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
-        for epoch in range(100):
+        for epoch in range(optimization_epochs):
             epoch_loss = 0.0
             data_size = 0
             for title_id, user_feedback in dataloader:
@@ -280,7 +282,7 @@ class PairWiseModelAgent(Agent):
         dataset = UserFeedbackDataset(self.clean_training_data)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
-        for epoch in range(100):
+        for epoch in range(optimization_epochs):
             epoch_loss = 0.0
             data_size = 0
             for title_ids, user_feedback, n in dataloader:

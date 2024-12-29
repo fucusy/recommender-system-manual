@@ -6,6 +6,7 @@ from env import RecommenderEnv
 from agent import Agent, BanditAgent, BucketSortingAgent, PointWiseModelAgent, PairWiseModelAgent
 from model import PointWiseModel, PairWiseModel
 from config import device
+from config import optimization_epochs
 
 class BucketSortingWatchTimeAgent(Agent):
     """
@@ -129,7 +130,7 @@ class WeightedPointWiseModelAgent(Agent):
         dataset = UserFeedbackDataset(self.valid_title_ids_tensor, self.valid_user_feedback_tensor, self.valid_watch_duration_weights_tensor)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
-        for epoch in range(100):
+        for epoch in range(optimization_epochs):
             epoch_loss = 0.0
             data_size = 0
             for title_id, user_feedback, watch_duration_weight in dataloader:
@@ -212,7 +213,7 @@ class WeightedPairWiseModelAgent(Agent):
         dataset = UserFeedbackDataset(self.clean_training_data)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
-        for epoch in range(100):
+        for epoch in range(optimization_epochs):
             epoch_loss = 0.0
             data_size = 0
             for title_ids, user_feedback, watch_duration_sum, n in dataloader:
@@ -283,7 +284,7 @@ class RegressionModelAgent(Agent):
         dataset = UserFeedbackDataset(self.valid_title_ids_tensor, self.valid_watch_duration_tensor)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
-        for epoch in range(100):
+        for epoch in range(optimization_epochs):
             epoch_loss = 0.0
             data_size = 0
             for title_ids, watch_duration in dataloader:
@@ -355,7 +356,7 @@ class TweedieModelAgent(Agent):
         dataset = UserFeedbackDataset(self.valid_title_ids_tensor, self.valid_watch_duration_tensor)
         dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
 
-        for epoch in range(100):
+        for epoch in range(optimization_epochs):
             epoch_loss = 0.0
             data_size = 0
             for title_ids, watch_duration in dataloader:
