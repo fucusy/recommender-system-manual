@@ -40,7 +40,7 @@ def run_single_command_in_parallel(command, repetitions, max_workers=4):
 if __name__ == "__main__":
     # List of commands to run
     # generate a filename with current date,
-    command = f"""python bandit_vs_learning_to_rank/weighted_agents.py | tee 'output/output_$(date +%Y%m%d_%H%M%S)_$(RANDOM).txt'"""
+    command = f"""python bandit_vs_learning_to_rank/weighted_agents.py"""
     # Run commands in parallel
     cpu_count = os.cpu_count()
     max_workers = cpu_count
@@ -49,4 +49,12 @@ if __name__ == "__main__":
     # Print results
     for output in results:
         print(f"Command: {command}\nOutput: {output}\n")
+    import datetime
+    # writing the results to a file with a filename that is the current date and time
+    date = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"output/output_{date}.txt"
+
+    with open(filename, "w") as f:
+        for output in results:
+            f.write(output)
 
