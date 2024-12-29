@@ -229,6 +229,76 @@ class WeightedPairWiseModelAgent(Agent):
 
         print("Training completed")
 
+class RegressionModelAgent(Agent):
+    def __init__(self, num_titles):        
+        self.num_titles = num_titles        
+        self.model = PointWiseModel(num_titles).to(device)
+        self.valid_title_ids_tensor = [] # each element is a title id
+        self.valid_watch_duration_tensor = [] # each element is a watch duration
+
+    def make_ranking(self):
+        # Get scores for all titles
+        scores = self.model(torch.arange(self.num_titles, device=device))
+        # Return titles sorted by their scores (highest first)
+        return torch.argsort(scores, descending=True)
+
+    def collect_user_feedback(self, title_ids, user_feedback): 
+        for title_id, feedback_tuple in zip(title_ids, user_feedback):
+            feedback, watch_duration = feedback_tuple
+
+            title_id_tensor = torch.tensor(title_id, dtype=torch.long, device=device)
+            watch_duration_tensor = torch.tensor(watch_duration, dtype=torch.float32, device=device)
+            if feedback != "NOT_SEEN":
+                self.valid_title_ids_tensor.append(title_id_tensor)
+                self.valid_watch_duration_tensor.append(watch_duration_tensor)
+            else:
+                break
+    
+    def understand_agent(self):
+        print("agent name: ", self.__class__.__name__)
+        print("model parameters: ", self.model.parameters())
+
+    def day_starts(self):
+        if len(self.valid_title_ids_tensor) > 0:
+            self.train()
+
+    def train(self):
+        optimizer = torch.optim.SGD(self.model.parameters(), lr=0.001)
+        # using Sigmoid Cross Entropy Loss first
+        criterion = nn.MSELoss(reduction='mean')
+
+        class UserFeedbackDataset(torch.utils.data.Dataset):
+            def __init__(self, valid_title_ids_tensor, valid_watch_duration_tensor):
+                self.valid_title_ids_tensor = valid_title_ids_tensor
+                self.valid_watch_duration_tensor = valid_watch_duration_tensor
+
+            def __len__(self):
+                return len(self.valid_title_ids_tensor)
+
+            def __getitem__(self, idx):
+                title_ids = self.valid_title_ids_tensor[idx]
+                watch_duration = self.valid_watch_duration_tensor[idx]
+                return title_ids, watch_duration
+
+        dataset = UserFeedbackDataset(self.valid_title_ids_tensor, self.valid_watch_duration_tensor)
+        dataloader = torch.utils.data.DataLoader(dataset, batch_size=32, shuffle=True)
+
+        for epoch in range(100):
+            epoch_loss = 0.0
+            data_size = 0
+            for title_ids, watch_duration in dataloader:
+                optimizer.zero_grad()
+                outputs = self.model(title_ids)
+                loss = criterion(outputs, watch_duration)
+                loss = loss.mean()
+                loss.backward()
+                optimizer.step()
+                epoch_loss += loss.item()
+                data_size += len(title_ids)
+            if epoch % 10 == 0:
+                print(f"Epoch {epoch}, data points: {data_size}, Loss per data point: {epoch_loss / data_size}")
+
+        print("Training completed")
 
 
 class TweedieModelAgent(Agent):
@@ -326,9 +396,10 @@ if __name__ == "__main__":
     weighted_pairwise_agent = WeightedPairWiseModelAgent(num_titles=title_size)
     pairwise_agent = PairWiseModelAgent(num_titles=title_size)
     tweedie_agent = TweedieModelAgent(num_titles=title_size)
-
+    regression_agent = RegressionModelAgent(num_titles=title_size)
     # agents = [weighted_pairwise_agent, pairwise_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent]
-    agents = [tweedie_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent, pairwise_agent, weighted_pairwise_agent]
+    agents = [tweedie_agent, regression_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent, pairwise_agent, weighted_pairwise_agent]
+    # agents = []
 
     # sort by probability, print the title id and value
     sorted_probabilities = sorted(enumerate(env.click_probabilities), key=lambda x: x[1], reverse=True)
