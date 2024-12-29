@@ -162,8 +162,10 @@ class TweedieLoss(torch.nn.Module):
         self.p = p
 
     def forward(self, y_pred, y_true):
-        a = y_true * torch.exp(y_pred * (1 - self.p)) / (1 - self.p)
-        b = torch.exp(y_pred * (2 - self.p)) / (2 - self.p)
+        # clip y_pred to be positive
+        y_pred = torch.clip(y_pred, min=0.0001)
+        a = y_true * torch.pow(y_pred, 1 - self.p) / (1 - self.p)
+        b = torch.pow(y_pred, 2 - self.p) / (2 - self.p)
         loss = -a + b
         return loss
 
