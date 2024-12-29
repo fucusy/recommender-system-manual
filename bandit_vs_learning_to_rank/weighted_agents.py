@@ -374,7 +374,7 @@ class TweedieModelAgent(Agent):
 
 
 if __name__ == "__main__":
-    title_size = 100
+    title_size = 2000
     user_size = 10 * title_size
     run_days = 10
 
@@ -399,7 +399,7 @@ if __name__ == "__main__":
     regression_agent = RegressionModelAgent(num_titles=title_size)
     # agents = [weighted_pairwise_agent, pairwise_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent]
     agents = [tweedie_agent, regression_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent, pairwise_agent, weighted_pairwise_agent]
-    # agents = []
+    agents = [tweedie_agent]
 
     # sort by probability, print the title id and value
     sorted_probabilities = sorted(enumerate(env.click_probabilities), key=lambda x: x[1], reverse=True)
@@ -435,15 +435,17 @@ if __name__ == "__main__":
             if not manual_edit_stage:
                 agent.day_starts()
                 
+            user_iteration_start_time = time.time()
+            if manual_edit_stage:
+                title_ranking = env.manual_edit_ranking()
+            else:
+                title_ranking = agent.make_ranking() #TODO: we will optimize bandits, bandits should offer ranking different for each user based on feedbacks
+                
             for user_idx in range(user_size):
                 if user_idx % 1000 == 0:
-                    print(f"user {user_idx} / {user_size}")
-
-                if manual_edit_stage:
-                    title_ranking = env.manual_edit_ranking()
-                else:
-                    title_ranking = agent.make_ranking()
-
+                    print(f"user {user_idx} / {user_size}, time taken: {time.time() - user_iteration_start_time}")
+                    user_iteration_start_time = time.time()                
+                
                 user_feedback = env.get_user_feedback(title_ranking)
                 
                 click_count = sum(1 for feedback, watch_duration in user_feedback if feedback == "CLICK")
