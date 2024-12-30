@@ -1,0 +1,842 @@
+Using device:  cpu
+title 9: 0.12
+title 0: 0.11
+title 5: 0.11
+title 7: 0.1
+title 8: 0.1
+title 3: 0.1
+title 4: 0.09
+title 1: 0.09
+title 6: 0.09
+title 2: 0.08
+reward_when_clicks_maximized:  (np.float64(0.2263523274518261), np.float64(12.93387570036891))
+reward_when_watch_duration_maximized:  (np.float64(0.20260003376244987), np.float64(14.886675444392258))
+agent name:  TweedieModelAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 24.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1491.5716562105772, max_watch_duration_reward: 1488.6675444392265
+user 0 / 100
+Day 1, actual_clicks_reward: 16.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1155.272455636271, max_watch_duration_reward: 1488.6675444392265
+user 0 / 100
+Day 2, actual_clicks_reward: 14.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 495.1383241430905, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 624, Loss per data point: 0.36222299054647106
+Epoch 10, data points: 624, Loss per data point: 0.2935511859563681
+Epoch 20, data points: 624, Loss per data point: 0.28066750749563557
+Epoch 30, data points: 624, Loss per data point: 0.2767357948498848
+Epoch 40, data points: 624, Loss per data point: 0.27712730719492984
+Epoch 50, data points: 624, Loss per data point: 0.2754764572168008
+Epoch 60, data points: 624, Loss per data point: 0.28013521356460375
+Epoch 70, data points: 624, Loss per data point: 0.2758164436389238
+Epoch 80, data points: 624, Loss per data point: 0.286409603479581
+Epoch 90, data points: 624, Loss per data point: 0.27495671541262895
+Training completed
+user 0 / 100
+Day 3, actual_clicks_reward: 28.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1571.5552030442877, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 823, Loss per data point: 0.2965491330782959
+Epoch 10, data points: 823, Loss per data point: 0.29261109142372993
+Epoch 20, data points: 823, Loss per data point: 0.293619962972685
+Epoch 30, data points: 823, Loss per data point: 0.2930825124534338
+Epoch 40, data points: 823, Loss per data point: 0.29191265303193437
+Epoch 50, data points: 823, Loss per data point: 0.29508425862067816
+Epoch 60, data points: 823, Loss per data point: 0.29189444399401454
+Epoch 70, data points: 823, Loss per data point: 0.29274508034762897
+Epoch 80, data points: 823, Loss per data point: 0.29391922724782915
+Epoch 90, data points: 823, Loss per data point: 0.2931923628722477
+Training completed
+user 0 / 100
+Day 4, actual_clicks_reward: 23.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1161.0334927841652, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1032, Loss per data point: 0.3044565329255984
+Epoch 10, data points: 1032, Loss per data point: 0.30673622576765314
+Epoch 20, data points: 1032, Loss per data point: 0.3067161574844242
+Epoch 30, data points: 1032, Loss per data point: 0.296431725339372
+Epoch 40, data points: 1032, Loss per data point: 0.2960703229719354
+Epoch 50, data points: 1032, Loss per data point: 0.2999513366425684
+Epoch 60, data points: 1032, Loss per data point: 0.2959594989931861
+Epoch 70, data points: 1032, Loss per data point: 0.2957092509713284
+Epoch 80, data points: 1032, Loss per data point: 0.30185391551764434
+Epoch 90, data points: 1032, Loss per data point: 0.2956814031268275
+Training completed
+user 0 / 100
+Day 5, actual_clicks_reward: 22.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1275.991947020595, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1236, Loss per data point: 0.296769397158453
+Epoch 10, data points: 1236, Loss per data point: 0.30144369717940545
+Epoch 20, data points: 1236, Loss per data point: 0.2964971840960308
+Epoch 30, data points: 1236, Loss per data point: 0.29521004050294947
+Epoch 40, data points: 1236, Loss per data point: 0.2975756068831509
+Epoch 50, data points: 1236, Loss per data point: 0.2950113039572262
+Epoch 60, data points: 1236, Loss per data point: 0.29509887533280454
+Epoch 70, data points: 1236, Loss per data point: 0.29698239908249247
+Epoch 80, data points: 1236, Loss per data point: 0.29721348223948557
+Epoch 90, data points: 1236, Loss per data point: 0.29620203462619227
+Training completed
+user 0 / 100
+Day 6, actual_clicks_reward: 18.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1394.9631089136396, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1427, Loss per data point: 0.3015733319892696
+Epoch 10, data points: 1427, Loss per data point: 0.30284865151440754
+Epoch 20, data points: 1427, Loss per data point: 0.3035786651445588
+Epoch 30, data points: 1427, Loss per data point: 0.3029445856705193
+Epoch 40, data points: 1427, Loss per data point: 0.30215155702415847
+Epoch 50, data points: 1427, Loss per data point: 0.3026876456268032
+Epoch 60, data points: 1427, Loss per data point: 0.30186360017686936
+Epoch 70, data points: 1427, Loss per data point: 0.30160246283003894
+Epoch 80, data points: 1427, Loss per data point: 0.30233135236754816
+Epoch 90, data points: 1427, Loss per data point: 0.3010293373129296
+Training completed
+user 0 / 100
+Day 7, actual_clicks_reward: 23.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1297.8211276556517, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1614, Loss per data point: 0.30501783086169315
+Epoch 10, data points: 1614, Loss per data point: 0.30500048243866534
+Epoch 20, data points: 1614, Loss per data point: 0.30307415249622444
+Epoch 30, data points: 1614, Loss per data point: 0.30351534858807605
+Epoch 40, data points: 1614, Loss per data point: 0.3106955997415044
+Epoch 50, data points: 1614, Loss per data point: 0.3031621274747222
+Epoch 60, data points: 1614, Loss per data point: 0.30487127404526115
+Epoch 70, data points: 1614, Loss per data point: 0.30505613648463065
+Epoch 80, data points: 1614, Loss per data point: 0.3059550383424818
+Epoch 90, data points: 1614, Loss per data point: 0.3048082547264619
+Training completed
+user 0 / 100
+Day 8, actual_clicks_reward: 26.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1629.5049516903332, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1815, Loss per data point: 0.3102438120145771
+Epoch 10, data points: 1815, Loss per data point: 0.31126072833689117
+Epoch 20, data points: 1815, Loss per data point: 0.309538622138914
+Epoch 30, data points: 1815, Loss per data point: 0.31043868472096675
+Epoch 40, data points: 1815, Loss per data point: 0.3089366035356338
+Epoch 50, data points: 1815, Loss per data point: 0.30917134009116937
+Epoch 60, data points: 1815, Loss per data point: 0.3095225565361254
+Epoch 70, data points: 1815, Loss per data point: 0.30937273009749483
+Epoch 80, data points: 1815, Loss per data point: 0.3091157787102313
+Epoch 90, data points: 1815, Loss per data point: 0.3097920070994984
+Training completed
+user 0 / 100
+Day 9, actual_clicks_reward: 17.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1070.2267488400205, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 2019, Loss per data point: 0.30770270856315984
+Epoch 10, data points: 2019, Loss per data point: 0.3077018042494012
+Epoch 20, data points: 2019, Loss per data point: 0.30800728776656855
+Epoch 30, data points: 2019, Loss per data point: 0.3080147938777929
+Epoch 40, data points: 2019, Loss per data point: 0.3089664892845664
+Epoch 50, data points: 2019, Loss per data point: 0.3076235406052777
+Epoch 60, data points: 2019, Loss per data point: 0.3171672676978222
+Epoch 70, data points: 2019, Loss per data point: 0.3079568382062907
+Epoch 80, data points: 2019, Loss per data point: 0.3082062757623379
+Epoch 90, data points: 2019, Loss per data point: 0.32035144028420376
+Training completed
+user 0 / 100
+Day 10, actual_clicks_reward: 19.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1033.821701441835, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 2206, Loss per data point: 0.30438149548182136
+Epoch 10, data points: 2206, Loss per data point: 0.3043332849971187
+Epoch 20, data points: 2206, Loss per data point: 0.30439161562638617
+Epoch 30, data points: 2206, Loss per data point: 0.3044133130140123
+Epoch 40, data points: 2206, Loss per data point: 0.30457230318921974
+Epoch 50, data points: 2206, Loss per data point: 0.3044258731122678
+Epoch 60, data points: 2206, Loss per data point: 0.30447098739776196
+Epoch 70, data points: 2206, Loss per data point: 0.3045111833003469
+Epoch 80, data points: 2206, Loss per data point: 0.30422579690962626
+Epoch 90, data points: 2206, Loss per data point: 0.30442607240685526
+Training completed
+user 0 / 100
+Day 11, actual_clicks_reward: 18.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 982.7745633725252, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 2373, Loss per data point: 0.3112711271453999
+Epoch 10, data points: 2373, Loss per data point: 0.31169216450989823
+Epoch 20, data points: 2373, Loss per data point: 0.3061692922666914
+Epoch 30, data points: 2373, Loss per data point: 0.3083239047777487
+Epoch 40, data points: 2373, Loss per data point: 0.3056450040843785
+Epoch 50, data points: 2373, Loss per data point: 0.3057145750879287
+Epoch 60, data points: 2373, Loss per data point: 0.3129110816556896
+Epoch 70, data points: 2373, Loss per data point: 0.3058203433165809
+Epoch 80, data points: 2373, Loss per data point: 0.3055167730679454
+Epoch 90, data points: 2373, Loss per data point: 0.3100146383260606
+Training completed
+user 0 / 100
+Day 12, actual_clicks_reward: 28.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1769.720807793536, max_watch_duration_reward: 1488.6675444392265
+agent name:  TweedieModelAgent
+model parameters:  <generator object Module.parameters at 0x125835890>
+actual_clicks_reward (rounded):  276.0
+max_clicks_reward (rounded):  294.26
+actual_watch_duration_reward (rounded):  16329.4
+max_watch_duration_reward (rounded):  19352.68
+agent name:  WeightedPointWiseModelAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 16.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1418.908654842007, max_watch_duration_reward: 1488.6675444392265
+user 0 / 100
+Day 1, actual_clicks_reward: 25.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1348.4570099807959, max_watch_duration_reward: 1488.6675444392265
+user 0 / 100
+Day 2, actual_clicks_reward: 13.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 845.6456644795193, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 637, Loss per data point: 0.1300544697598348
+Epoch 10, data points: 637, Loss per data point: 0.11099381050097887
+Epoch 20, data points: 637, Loss per data point: 0.10215266804493016
+Epoch 30, data points: 637, Loss per data point: 0.09740933013299197
+Epoch 40, data points: 637, Loss per data point: 0.09414851534497606
+Epoch 50, data points: 637, Loss per data point: 0.09229525133055083
+Epoch 60, data points: 637, Loss per data point: 0.09086903878246409
+Epoch 70, data points: 637, Loss per data point: 0.08991173110914005
+Epoch 80, data points: 637, Loss per data point: 0.08954142719460433
+Epoch 90, data points: 637, Loss per data point: 0.08911530657128973
+Training completed
+user 0 / 100
+Day 3, actual_clicks_reward: 18.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 792.4817312545309, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 833, Loss per data point: 0.11053461587729574
+Epoch 10, data points: 833, Loss per data point: 0.09133898832646309
+Epoch 20, data points: 833, Loss per data point: 0.0878030089985709
+Epoch 30, data points: 833, Loss per data point: 0.0876199143702815
+Epoch 40, data points: 833, Loss per data point: 0.08767080578912778
+Epoch 50, data points: 833, Loss per data point: 0.08746378619273026
+Epoch 60, data points: 833, Loss per data point: 0.11740294817973729
+Epoch 70, data points: 833, Loss per data point: 0.08825811822445882
+Epoch 80, data points: 833, Loss per data point: 0.08724511528358597
+Epoch 90, data points: 833, Loss per data point: 0.08756382990570342
+Training completed
+user 0 / 100
+Day 4, actual_clicks_reward: 13.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 794.7798939914197, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1041, Loss per data point: 0.08176375380167013
+Epoch 10, data points: 1041, Loss per data point: 0.0813682036944929
+Epoch 20, data points: 1041, Loss per data point: 0.08229562711761504
+Epoch 30, data points: 1041, Loss per data point: 0.08141357857487044
+Epoch 40, data points: 1041, Loss per data point: 0.08252858803549372
+Epoch 50, data points: 1041, Loss per data point: 0.082857859867565
+Epoch 60, data points: 1041, Loss per data point: 0.08137431896786411
+Epoch 70, data points: 1041, Loss per data point: 0.08173961523744948
+Epoch 80, data points: 1041, Loss per data point: 0.08071485927237214
+Epoch 90, data points: 1041, Loss per data point: 0.08146945384977874
+Training completed
+user 0 / 100
+Day 5, actual_clicks_reward: 22.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1472.8114140361704, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1255, Loss per data point: 0.0939078480598936
+Epoch 10, data points: 1255, Loss per data point: 0.09520231133913139
+Epoch 20, data points: 1255, Loss per data point: 0.09382719741874482
+Epoch 30, data points: 1255, Loss per data point: 0.09491767400051968
+Epoch 40, data points: 1255, Loss per data point: 0.09281145476724997
+Epoch 50, data points: 1255, Loss per data point: 0.09158741041008694
+Epoch 60, data points: 1255, Loss per data point: 0.09059212644736606
+Epoch 70, data points: 1255, Loss per data point: 0.09053424586100407
+Epoch 80, data points: 1255, Loss per data point: 0.09353966518227323
+Epoch 90, data points: 1255, Loss per data point: 0.09356719744632919
+Training completed
+user 0 / 100
+Day 6, actual_clicks_reward: 22.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1742.4463323850819, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1453, Loss per data point: 0.09990061408310041
+Epoch 10, data points: 1453, Loss per data point: 0.09995556230472846
+Epoch 20, data points: 1453, Loss per data point: 0.1009946935601835
+Epoch 30, data points: 1453, Loss per data point: 0.101196842200167
+Epoch 40, data points: 1453, Loss per data point: 0.10287532077029254
+Epoch 50, data points: 1453, Loss per data point: 0.10181097629885795
+Epoch 60, data points: 1453, Loss per data point: 0.09966932865807047
+Epoch 70, data points: 1453, Loss per data point: 0.10015357102678303
+Epoch 80, data points: 1453, Loss per data point: 0.1036908890326435
+Epoch 90, data points: 1453, Loss per data point: 0.10073158374672829
+Training completed
+user 0 / 100
+Day 7, actual_clicks_reward: 20.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 1185.5067999919204, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1656, Loss per data point: 0.10525448667110453
+Epoch 10, data points: 1656, Loss per data point: 0.10516583668472974
+Epoch 20, data points: 1656, Loss per data point: 0.10493413421014945
+Epoch 30, data points: 1656, Loss per data point: 0.10484377014032309
+Epoch 40, data points: 1656, Loss per data point: 0.10481171662680769
+Epoch 50, data points: 1656, Loss per data point: 0.10468558117675321
+Epoch 60, data points: 1656, Loss per data point: 0.10487125734776115
+Epoch 70, data points: 1656, Loss per data point: 0.10522691727332446
+Epoch 80, data points: 1656, Loss per data point: 0.10524775969665408
+Epoch 90, data points: 1656, Loss per data point: 0.10506026108483761
+Training completed
+user 0 / 100
+Day 8, actual_clicks_reward: 24.0, max_clicks_reward: 22.635232745182652, actual_watch_duration_reward: 2115.4939676412405, max_watch_duration_reward: 1488.6675444392265
+Epoch 0, data points: 1856, Loss per data point: 0.11479110977259176
+Epoch 10, data points: 1856, Loss per data point: 0.11417846000303739
+Epoch 20, data points: 1856, Loss per data point: 0.114247Epoch 30, data points: 1805, Loss per data point: 0.11542503470529149
+Epoch 40, data points: 1805, Loss per data point: 0.11667222009141029
+Epoch 50, data points: 1805, Loss per data point: 0.11435644395463684
+Epoch 60, data points: 1805, Loss per data point: 0.11484109011383269
+Epoch 70, data points: 1805, Loss per data point: 0.11637968234408265
+Epoch 80, data points: 1805, Loss per data point: 0.11475328471191702
+Epoch 90, data points: 1805, Loss per data point: 0.11445072136427227
+Training completed
+user 0 / 100
+Day 9, actual_clicks_reward: 22.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1044.590240996227, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 1990, Loss per data point: 0.11337339305997494
+Epoch 10, data points: 1990, Loss per data point: 0.11244479813168397
+Epoch 20, data points: 1990, Loss per data point: 0.11351045462953385
+Epoch 30, data points: 1990, Loss per data point: 0.11384638619782338
+Epoch 40, data points: 1990, Loss per data point: 0.11323623723121144
+Epoch 50, data points: 1990, Loss per data point: 0.11359791593935023
+Epoch 60, data points: 1990, Loss per data point: 0.11336502166249644
+Epoch 70, data points: 1990, Loss per data point: 0.11238961624889518
+Epoch 80, data points: 1990, Loss per data point: 0.11387597424301071
+Epoch 90, data points: 1990, Loss per data point: 0.11318349622601839
+Training completed
+user 0 / 100
+Day 10, actual_clicks_reward: 23.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1071.2958049165206, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 2184, Loss per data point: 0.11317566364676088
+Epoch 10, data points: 2184, Loss per data point: 0.11193322966168652
+Epoch 20, data points: 2184, Loss per data point: 0.11214272926251094
+Epoch 30, data points: 2184, Loss per data point: 0.11492541219506945
+Epoch 40, data points: 2184, Loss per data point: 0.11223766758983389
+Epoch 50, data points: 2184, Loss per data point: 0.11222961973467152
+Epoch 60, data points: 2184, Loss per data point: 0.11284496075722761
+Epoch 70, data points: 2184, Loss per data point: 0.11364024129761008
+Epoch 80, data points: 2184, Loss per data point: 0.111606543569829
+Epoch 90, data points: 2184, Loss per data point: 0.112464841960114
+Training completed
+user 0 / 100
+Day 11, actual_clicks_reward: 28.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1265.856232666194, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 2400, Loss per data point: 0.11175391214589278
+Epoch 10, data points: 2400, Loss per data point: 0.11171236246513824
+Epoch 20, data points: 2400, Loss per data point: 0.11167956208189328
+Epoch 30, data points: 2400, Loss per data point: 0.11163327698906263
+Epoch 40, data points: 2400, Loss per data point: 0.11167913786446054
+Epoch 50, data points: 2400, Loss per data point: 0.11164906735221546
+Epoch 60, data points: 2400, Loss per data point: 0.11161711916327477
+Epoch 70, data points: 2400, Loss per data point: 0.11166821269318461
+Epoch 80, data points: 2400, Loss per data point: 0.11164368110398451
+Epoch 90, data points: 2400, Loss per data point: 0.11164802114168802
+Training completed
+user 0 / 100
+Day 12, actual_clicks_reward: 31.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1805.7513924353507, max_watch_duration_reward: 1408.2226013169936
+agent name:  WeightedPointWiseModelAgent
+model parameters:  <generator object Module.parameters at 0x129a74dd0>
+actual_clicks_reward (rounded):  294.0
+max_clicks_reward (rounded):  295.98
+actual_watch_duration_reward (rounded):  16062.72
+max_watch_duration_reward (rounded):  18306.89
+agent name:  PointWiseModelAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 19.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 976.4695720276258, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 1, actual_clicks_reward: 25.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1466.0015328338604, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 2, actual_clicks_reward: 23.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1290.0676888258206, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 571, Loss per data point: 0.024558561382694546
+Epoch 10, data points: 571, Loss per data point: 0.022173823387526798
+Epoch 20, data points: 571, Loss per data point: 0.020231928800325677
+Epoch 30, data points: 571, Loss per data point: 0.018594839631362887
+Epoch 40, data points: 571, Loss per data point: 0.01725484130678995
+Epoch 50, data points: 571, Loss per data point: 0.01615857201157017
+Epoch 60, data points: 571, Loss per data point: 0.015294225485228824
+Epoch 70, data points: 571, Loss per data point: 0.01458956152461665
+Epoch 80, data points: 571, Loss per data point: 0.0140643862521377
+Epoch 90, data points: 571, Loss per data point: 0.013643871099017756
+Training completed
+user 0 / 100
+Day 3, actual_clicks_reward: 19.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1042.1347297598377, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 762, Loss per data point: 0.014671711823133033
+Epoch 10, data points: 762, Loss per data point: 0.014135830045685055
+Epoch 20, data points: 762, Loss per data point: 0.013723819313712634
+Epoch 30, data points: 762, Loss per data point: 0.013321532078302438
+Epoch 40, data points: 762, Loss per data point: 0.013016092339212812
+Epoch 50, data points: 762, Loss per data point: 0.012783312578526695
+Epoch 60, data points: 762, Loss per data point: 0.012541746217121915
+Epoch 70, data points: 762, Loss per data point: 0.012313911921083144
+Epoch 80, data points: 762, Loss per data point: 0.012208179265182474
+Epoch 90, data points: 762, Loss per data point: 0.012041933169671558
+Training completed
+user 0 / 100
+Day 4, actual_clicks_reward: 27.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1048.8501444669437, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 993, Loss per data point: 0.012600917740530838
+Epoch 10, data points: 993, Loss per data point: 0.012351796901358097
+Epoch 20, data points: 993, Loss per data point: 0.012054329312219841
+Epoch 30, data points: 993, Loss per data point: 0.01182101615906242
+Epoch 40, data points: 993, Loss per data point: 0.011634387533590272
+Epoch 50, data points: 993, Loss per data point: 0.013170362239157685
+Epoch 60, data points: 993, Loss per data point: 0.011425394816220947
+Epoch 70, data points: 993, Loss per data point: 0.011441524130220019
+Epoch 80, data points: 993, Loss per data point: 0.011352504203086653
+Epoch 90, data points: 993, Loss per data point: 0.013439895403229098
+Training completed
+user 0 / 100
+Day 5, actual_clicks_reward: 16.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 493.1677719501961, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 1176, Loss per data point: 0.011125287763318238
+Epoch 10, data points: 1176, Loss per data point: 0.011089244756062015
+Epoch 20, data points: 1176, Loss per data point: 0.010992064945349078
+Epoch 30, data points: 1176, Loss per data point: 0.01097452849605862
+Epoch 40, data points: 1176, Loss per data point: 0.010892074662862586
+Epoch 50, data points: 1176, Loss per data point: 0.010887543499773862
+Epoch 60, data points: 1176, Loss per data point: 0.010928449100580346
+Epoch 70, data points: 1176, Loss per data point: 0.010855540316425213
+Epoch 80, data points: 1176, Loss per data point: 0.010864006513793047
+Epoch 90, data points: 1176, Loss per data point: 0.010887170615954464
+Training completed
+user 0 / 100
+Day 6, actual_clicks_reward: 24.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1093.7196142920811, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 1368, Loss per data point: 0.010981738665386251
+Epoch 10, data points: 1368, Loss per data point: 0.010989540016921292
+Epoch 20, data points: 1368, Loss per data point: 0.01093611840637978
+Epoch 30, data points: 1368, Loss per data point: 0.010950366187601061
+Epoch 40, data points: 1368, Loss per data point: 0.010991530547365111
+Epoch 50, data points: 1368, Loss per data point: 0.011004808658396292
+Epoch 60, data points: 1368, Loss per data point: 0.010926555755019884
+Epoch 70, data points: 1368, Loss per data point: 0.010969733993648088
+Epoch 80, data points: 1368, Loss per data point: 0.010936949118884683
+Epoch 90, data points: 1368, Loss per data point: 0.010997233939580402
+Training completed
+user 0 / 100
+Day 7, actual_clicks_reward: 33.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1882.4829194107492, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 1606, Loss per data point: 0.011442384556177099
+Epoch 10, data points: 1606, Loss per data point: 0.011212460330199186
+Epoch 20, data points: 1606, Loss per data point: 0.011210286602433563
+Epoch 30, data points: 1606, Loss per data point: 0.011358469506612009
+Epoch 40, data points: 1606, Loss per data point: 0.011205016198112244
+Epoch 50, data points: 1606, Loss per data point: 0.011526964456399677
+Epoch 60, data points: 1606, Loss per data point: 0.011200206829780065
+Epoch 70, data points: 1606, Loss per data point: 0.011192950623047307
+Epoch 80, data points: 1606, Loss per data point: 0.01137602726371024
+Epoch 90, data points: 1606, Loss per data point: 0.01135939114714322
+Training completed
+user 0 / 100
+Day 8, actual_clicks_reward: 17.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 884.5838743608545, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 1812, Loss per data point: 0.010995003454403636
+Epoch 10, data points: 1812, Loss per data point: 0.01098926935270922
+Epoch 20, data points: 1812, Loss per data point: 0.01093948870140722
+Epoch 30, data points: 1812, Loss per data point: 0.010958508870031924
+Epoch 40, data points: 1812, Loss per data point: 0.011066774383318871
+Epoch 50, data points: 1812, Loss per data point: 0.010999170656235803
+Epoch 60, data points: 1812, Loss per data point: 0.010977727692023282
+Epoch 70, data points: 1812, Loss per data point: 0.010975989967453033
+Epoch 80, data points: 1812, Loss per data point: 0.010935449861730171
+Epoch 90, data points: 1812, Loss per data point: 0.010975614872660331
+Training completed
+user 0 / 100
+Day 9, actual_clicks_reward: 20.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1009.3878016451804, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 1988, Loss per data point: 0.010982334726233358
+Epoch 10, data points: 1988, Loss per data point: 0.010979406917898707
+Epoch 20, data points: 1988, Loss per data point: 0.011211228375163836
+Epoch 30, data points: 1988, Loss per data point: 0.010974168144091514
+Epoch 40, data points: 1988, Loss per data point: 0.01097744005081999
+Epoch 50, data points: 1988, Loss per data point: 0.01097571096519829
+Epoch 60, data points: 1988, Loss per data point: 0.010953707504320433
+Epoch 70, data points: 1988, Loss per data point: 0.01096853661450222
+Epoch 80, data points: 1988, Loss per data point: 0.011203624255640405
+Epoch 90, data points: 1988, Loss per data point: 0.011198866992469286
+Training completed
+user 0 / 100
+Day 10, actual_clicks_reward: 23.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1059.6442173881455, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 2182, Loss per data point: 0.011295064034044578
+Epoch 10, data points: 2182, Loss per data point: 0.0110041018606161
+Epoch 20, data points: 2182, Loss per data point: 0.010997291060214081
+Epoch 30, data points: 2182, Loss per data point: 0.011001002791275354
+Epoch 40, data points: 2182, Loss per data point: 0.0111163257801347
+Epoch 50, data points: 2182, Loss per data point: 0.010995936000379918
+Epoch 60, data points: 2182, Loss per data point: 0.010998252366083025
+Epoch 70, data points: 2182, Loss per data point: 0.011127948620989167
+Epoch 80, data points: 2182, Loss per data point: 0.011130222226096118
+Epoch 90, data points: 2182, Loss per data point: 0.011127434527513415
+Training completed
+user 0 / 100
+Day 11, actual_clicks_reward: 19.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1095.4286349187241, max_watch_duration_reward: 1408.2226013169936
+Epoch 0, data points: 2357, Loss per data point: 0.010973286988449946
+Epoch 10, data points: 2357, Loss per data point: 0.010973223865563252
+Epoch 20, data points: 2357, Loss per data point: 0.010974155949949459
+Epoch 30, data points: 2357, Loss per data point: 0.011002153885227975
+Epoch 40, data points: 2357, Loss per data point: 0.011003220459390202
+Epoch 50, data points: 2357, Loss per data point: 0.010972033312096148
+Epoch 60, data points: 2357, Loss per data point: 0.010987452691674587
+Epoch 70, data points: 2357, Loss per data point: 0.010959302286602048
+Epoch 80, data points: 2357, Loss per data point: 0.011005519840694051
+Epoch 90, data points: 2357, Loss per data point: 0.011001200438506734
+Training completed
+user 0 / 100
+Day 12, actual_clicks_reward: 26.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1279.4827475879677, max_watch_duration_reward: 1408.2226013169936
+agent name:  PointWiseModelAgent
+model parameters:  <generator object Module.parameters at 0x129a74cf0>
+actual_clicks_reward (rounded):  291.0
+max_clicks_reward (rounded):  295.98
+actual_watch_duration_reward (rounded):  14621.42
+max_watch_duration_reward (rounded):  18306.89
+agent name:  BanditAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 21.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 960.09812939871, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 1, actual_clicks_reward: 25.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1552.4889253405056, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 2, actual_clicks_reward: 16.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 990.7393899508043, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 3, actual_clicks_reward: 29.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1391.760710252753, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 4, actual_clicks_reward: 24.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1175.2446201768344, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 5, actual_clicks_reward: 20.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1354.3449352386335, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 6, actual_clicks_reward: 19.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 597.3586537175916, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 7, actual_clicks_reward: 25.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 959.7953322666282, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 8, actual_clicks_reward: 29.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1392.6268665725602, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 9, actual_clicks_reward: 24.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1279.915235409968, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 10, actual_clicks_reward: 25.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1242.9048223466668, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 11, actual_clicks_reward: 22.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1208.8468545074115, max_watch_duration_reward: 1408.2226013169936
+user 0 / 100
+Day 12, actual_clicks_reward: 27.0, max_clicks_reward: 22.767829260968828, actual_watch_duration_reward: 1132.1270110310531, max_watch_duration_reward: 1408.2226013169936
+agent name:  BanditAgent
+click_counts:  [14.  7.  8. 20. 39. 76. 31. 15. 52. 44.]
+seen_counts:  [135. 108.  73. 161. 318. 525. 252. 138. 416. 395.]
+click_probabilities:  [0.1037037  0.06481481 0.10958904 0.1242236  0.12264151 0.1447619
+ 0.12301587 0.10869565 0.125      0.11139241]
+actual_clicks_reward (rounded):  306max_clicks_reward (rounded):  285.66
+actua271.28
+actual_watch_duration_reward (rounded):  11987.69
+max_watch_duration_reward (rounded):  16721.61
+agent name:  BucketSortingAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 22.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 904.0770568283596, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 1, actual_clicks_reward: 22.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 744.6141937295057, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 2, actual_clicks_reward: 26.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1534.515543257956, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 3, actual_clicks_reward: 16.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 790.2880420255259, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 4, actual_clicks_reward: 17.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 903.0606058402783, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 5, actual_clicks_reward: 17.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1148.000838138515, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 6, actual_clicks_reward: 15.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1030.5501343183823, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 7, actual_clicks_reward: 26.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1017.0067247331913, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 8, actual_clicks_reward: 33.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1595.1292145015593, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 9, actual_clicks_reward: 15.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 824.8083073977077, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 10, actual_clicks_reward: 26.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1397.1407296403013, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 11, actual_clicks_reward: 24.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1241.7004482034167, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 12, actual_clicks_reward: 23.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1240.7403284703557, max_watch_duration_reward: 1286.2775933783337
+agent name:  BucketSortingAgent
+bucket_size:  1
+click_counts:  [ 59.   6. 107.  21.   2.   3.  18.  56.  10.   0.]
+click_through_rates:  [0.09593496 0.06593407 0.12829736 0.09767442 0.06451613 0.06122449
+ 0.09424084 0.11618257 0.0877193  0.        ]
+actual_clicks_reward (rounded):  282.0
+max_clicks_reward (rounded):  271.28
+actual_watch_duration_reward (rounded):  14371.63
+max_watch_duration_reward (rounded):  16721.61
+agent name:  BucketSortingWatchTimeAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 816.3574296596852, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 1, actual_clicks_reward: 20.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 937.8245888675785, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 2, actual_clicks_reward: 21.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1401.545923478225, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 3, actual_clicks_reward: 14.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 636.3936385742012, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 4, actual_clicks_reward: 10.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 480.5002050054877, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 5, actual_clicks_reward: 25.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1355.2753234835454, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 6, actual_clicks_reward: 16.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 766.5199062655932, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 7, actual_clicks_reward: 26.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1633.2388536559224, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 8, actual_clicks_reward: 12.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 545.8293679848545, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 9, actual_clicks_reward: 13.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 728.014282111625, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 10, actual_clicks_reward: 17.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1267.4762485029464, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 11, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 857.1712671252532, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 12, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1074.861976524481, max_watch_duration_reward: 1286.2775933783337
+agent name:  BucketSortingWatchTimeAgent
+bucket_size:  1
+watch_times:  [1652.70384205 2367.74825005 4925.68168301    9.32683509    0.
+    0.          260.42668829   10.76364604 1451.10132215 1823.25674456]
+watch_time_per_seen:  [4.20535329 4.85194314 5.6357914  0.5181575  0.         0.
+ 2.99341021 1.34545576 4.83700441 4.84908709]
+actual_clicks_reward (rounded):  231.0
+max_clicks_reward (rounded):  271.28
+actual_watch_duration_reward (rounded):  12501.01
+max_watch_duration_reward (rounded):  16721.61
+agent name:  PairWiseModelAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 893.8091041634349, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 1, actual_clicks_reward: 25.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1123.4163763093222, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 2, actual_clicks_reward: 17.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 675.0931095109564, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 45, Loss per data point: 2.523199823167589
+Epoch 10, data points: 45, Loss per data point: 2.2639754123157925
+Epoch 20, data points: 45, Loss per data point: 2.193493640422821
+Epoch 30, data points: 45, Loss per data point: 2.176260753472646
+Epoch 40, data points: 45, Loss per data point: 2.1648834228515623
+Epoch 50, data points: 45, Loss per data point: 2.153484605418311
+Epoch 60, data points: 45, Loss per data point: 2.1451966908242968
+Epoch 70, data points: 45, Loss per data point: 2.135134710205926
+Epoch 80, data points: 45, Loss per data point: 2.1257256865501404
+Epoch 90, data points: 45, Loss per data point: 2.121933020485772
+Training completed
+user 0 / 100
+Day 3, actual_clicks_reward: 18.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1104.8088343002416, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 58, Loss per data point: 2.18351350056714
+Epoch 10, data points: 58, Loss per data point: 2.1683512001202025
+Epoch 20, data points: 58, Loss per data point: 2.1547469517280318
+Epoch 30, data points: 58, Loss per data point: 2.1497955075625717
+Epoch 40, data points: 58, Loss per data point: 2.1460831319463662
+Epoch 50, data points: 58, Loss per data point: 2.143453036916667
+Epoch 60, data points: 58, Loss per data point: 2.140706336703794
+Epoch 70, data points: 58, Loss per data point: 2.1376542788127373
+Epoch 80, data points: 58, Loss per data point: 2.13775035738945
+Epoch 90, data points: 58, Loss per data point: 2.137461145376337
+Training completed
+user 0 / 100
+Day 4, actual_clicks_reward: 18.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 928.5864723106395, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 71, Loss per data point: 2.1862734933974037
+Epoch 10, data points: 71, Loss per data point: 2.1899601615650552
+Epoch 20, data points: 71, Loss per data point: 2.189266411351486
+Epoch 30, data points: 71, Loss per data point: 2.188106987677829
+Epoch 40, data points: 71, Loss per data point: 2.1876990056373704
+Epoch 50, data points: 71, Loss per data point: 2.187074381700704
+Epoch 60, data points: 71, Loss per data point: 2.186955796161168
+Epoch 70, data points: 71, Loss per data point: 2.1872099151074047
+Epoch 80, data points: 71, Loss per data point: 2.184878920165586
+Epoch 90, data points: 71, Loss per data point: 2.184962700790083
+Training completed
+user 0 / 100
+Day 5, actual_clicks_reward: 24.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1428.126467646595, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 87, Loss per data point: 2.244227389494578
+Epoch 10, data points: 87, Loss per data point: 2.243904427550305
+Epoch 20, data points: 87, Loss per data point: 2.241930838288932
+Epoch 30, data points: 87, Loss per data point: 2.2399333023476875
+Epoch 40, data points: 87, Loss per data point: 2.2378461066333726
+Epoch 50, data points: 87, Loss per data point: 2.235563985232649
+Epoch 60, data points: 87, Loss per data point: 2.2332152950352637
+Epoch 70, data points: 87, Loss per data point: 2.2319289206088273
+Epoch 80, data points: 87, Loss per data point: 2.231237451235453
+Epoch 90, data points: 87, Loss per data point: 2.2289797170408843
+Training completed
+user 0 / 100
+Day 6, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1098.4131359882201, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 100, Loss per data point: 2.395039154291153
+Epoch 10, data points: 100, Loss per data point: 2.3622928285598754
+Epoch 20, data points: 100, Loss per data point: 2.3499121826887133
+Epoch 30, data points: 100, Loss per data point: 2.348586981892586
+Epoch 40, data points: 100, Loss per data point: 2.3471484702825545
+Epoch 50, data points: 100, Loss per data point: 2.34732746720314
+Epoch 60, data points: 100, Loss per data point: 2.3476292550563813
+Epoch 70, data points: 100, Loss per data point: 2.345134574174881
+Epoch 80, data points: 100, Loss per data point: 2.344497171640396
+Epoch 90, data points: 100, Loss per data point: 2.344450206756592
+Training completed
+user 0 / 100
+Day 7, actual_clicks_reward: 26.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1635.7258353485513, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 119, Loss per data point: 2.4996840958835698
+Epoch 10, data points: 119, Loss per data point: 2.4844812315051295
+Epoch 20, data points: 119, Loss per data point: 2.462999861781337
+Epoch 30, data points: 119, Loss per data point: 2.4517951582660196
+Epoch 40, data points: 119, Loss per data point: 2.4474236153754867
+Epoch 50, data points: 119, Loss per data point: 2.4435335908617293
+Epoch 60, data points: 119, Loss per data point: 2.4424478146208433
+Epoch 70, data points: 119, Loss per data point: 2.4417843212600516
+Epoch 80, data points: 119, Loss per data point: 2.4410577731973984
+Epoch 90, data points: 119, Loss per data point: 2.4407218253913046
+Training completed
+user 0 / 100
+Day 8, actual_clicks_reward: 24.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1251.7304232091954, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 132, Loss per data point: 2.5557615982763693
+Epoch 10, data points: 132, Loss per data point: 2.5122083592595477
+Epoch 20, data points: 132, Loss per data point: 2.482866362640352
+Epoch 30, data points: 132, Loss per data point: 2.462094876802329
+Epoch 40, data points: 132, Loss per data point: 2.447388343738787
+Epoch 50, data points: 132, Loss per data point: 2.44260714541782
+Epoch 60, data points: 132, Loss per data point: 2.4371656238129646
+Epoch 70, data points: 132, Loss per data point: 2.430061967987003
+Epoch 80, data points: 132, Loss per data point: 2.4212433569359058
+Epoch 90, data points: 132, Loss per data point: 2.4137240408947975
+Training completed
+user 0 / 100
+Day 9, actual_clicks_reward: 22.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1133.898252350408, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 146, Loss per data point: 2.343995649928916
+Epoch 10, data points: 146, Loss per data point: 2.3359295929947943
+Epoch 20, data points: 146, Loss per data point: 2.33042149878528
+Epoch 30, data points: 146, Loss per data point: 2.3269566926237655
+Epoch 40, data points: 146, Loss per data point: 2.3243072502417106
+Epoch 50, data points: 146, Loss per data point: 2.3220219134467923
+Epoch 60, data points: 146, Loss per data point: 2.3184224318151605
+Epoch 70, data points: 146, Loss per data point: 2.3173510885401947
+Epoch 80, data points: 146, Loss per data point: 2.3163692506208813
+Epoch 90, data points: 146, Loss per data point: 2.316481416764325
+Training completed
+user 0 / 100
+Day 10, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 950.7609011611156, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 159, Loss per data point: 2.3682391920929433
+Epoch 10, data points: 159, Loss per data point: 2.3590102345688537
+Epoch 20, data points: 159, Loss per data point: 2.3508358785191423
+Epoch 30, data points: 159, Loss per data point: 2.3484638914372185
+Epoch 40, data points: 159, Loss per data point: 2.347785548968885
+Epoch 50, data points: 159, Loss per data point: 2.347447137037913
+Epoch 60, data points: 159, Loss per data point: 2.346681018295528
+Epoch 70, data points: 159, Loss per data point: 2.3461922463381066
+Epoch 80, data points: 159, Loss per data point: 2.346275698089
+Epoch 90, data points: 159, Loss per data point: 2.345856527112565
+Training completed
+user 0 / 100
+Day 11, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 803.0635420222823, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 171, Loss per data point: 2.355004956847743
+Epoch 10, data points: 171, Loss per data point: 2.3513962469602885
+Epoch 20, data points: 171, Loss per data point: 2.3491614893165944
+Epoch 30, data points: 171, Loss per data point: 2.346125345132504
+Epoch 40, data points: 171, Loss per data point: 2.3447089854039644
+Epoch 50, data points: 171, Loss per data point: 2.3428066421670524
+Epoch 60, data points: 171, Loss per data point: 2.341146198281071
+Epoch 70, data points: 171, Loss per data point: 2.3401167214962473
+Epoch 80, data points: 171, Loss per data point: 2.3396852100104617
+Epoch 90, data points: 171, Loss per data point: 2.3392759307086117
+Training completed
+user 0 / 100
+Day 12, actual_clicks_reward: 30.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1348.8241388601302, max_watch_duration_reward: 1286.2775933783337
+agent name:  PairWiseModelAgent
+model parameters:  <generator object Module.parameters at 0x1314e9dd0>
+actual_clicks_reward (rounded):  280.0
+max_clicks_reward (rounded):  271.28
+actual_watch_duration_reward (rounded):  14376.26
+max_watch_duration_reward (rounded):  16721.61
+agent name:  WeightedPairWiseModelAgent
+user 0 / 100
+Day 0, actual_clicks_reward: 20.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1013.8940631916668, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 1, actual_clicks_reward: 29.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 911.6184955069782, max_watch_duration_reward: 1286.2775933783337
+user 0 / 100
+Day 2, actual_clicks_reward: 16.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1134.8636216976392, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 45, Loss per data point: 8.563530637820561
+Epoch 10, data points: 45, Loss per data point: 7.728183969524172
+Epoch 20, data points: 45, Loss per data point: 7.653810938861635
+Epoch 30, data points: 45, Loss per data point: 7.6185861229896545
+Epoch 40, data points: 45, Loss per data point: 7.5855229142639375
+Epoch 50, data points: 45, Loss per data point: 7.566492781043053
+Epoch 60, data points: 45, Loss per data point: 7.548573542303509
+Epoch 70, data points: 45, Loss per data point: 7.545175922248099
+Epoch 80, data points: 45, Loss per data point: 7.443710053629346
+Epoch 90, data points: 45, Loss per data point: 7.500022397769822
+Training completed
+user 0 / 100
+Day 3, actual_clicks_reward: 23.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1297.12238427072, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 62, Loss per data point: 9.768626086654201
+Epoch 10, data points: 62, Loss per data point: 9.098070052121916
+Epoch 20, data points: 62, Loss per data point: 8.921583731558771
+Epoch 30, data points: 62, Loss per data point: 8.852471068982155
+Epoch 40, data points: 62, Loss per data point: 8.839663335993405
+Epoch 50, data points: 62, Loss per data point: 8.82291693925377
+Epoch 60, data points: 62, Loss per data point: 8.814840058405553
+Epoch 70, data points: 62, Loss per data point: 8.81248662104049
+Epoch 80, data points: 62, Loss per data point: 8.814745262385376
+Epoch 90, data points: 62, Loss per data point: 8.809500841363784
+Training completed
+user 0 / 100
+Day 4, actual_clicks_reward: 21.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1514.145228359094, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 74, Loss per data point: 9.556194754871163
+Epoch 10, data points: 74, Loss per data point: 9.179627568158951
+Epoch 20, data points: 74, Loss per data point: 9.155370188524595
+Epoch 30, data points: 74, Loss per data point: 9.110132008992338
+Epoch 40, data points: 74, Loss per data point: 9.114089037316877
+Epoch 50, data points: 74, Loss per data point: 9.15391142420845
+Epoch 60, data points: 74, Loss per data point: 9.143950795503082
+Epoch 70, data points: 74, Loss per data point: 9.143239045465315
+Epoch 80, data points: 74, Loss per data point: 9.138367478911942
+Epoch 90, data points: 74, Loss per data point: 9.143747145360386
+Training completed
+user 0 / 100
+Day 5, actual_clicks_reward: 18.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1287.9689554015777, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 84, Loss per data point: 9.341573935445576
+Epoch 10, data points: 84, Loss per data point: 9.286205988266461
+Epoch 20, data points: 84, Loss per data point: 9.294192123359867
+Epoch 30, data points: 84, Loss per data point: 9.268575114375423
+Epoch 40, data points: 84, Loss per data point: 9.227079528849572
+Epoch 50, data points: 84, Loss per data point: 9.275748365425638
+Epoch 60, data points: 84, Loss per data point: 9.260392561065688
+Epoch 70, data points: 84, Loss per data point: 9.215299040622389
+Epoch 80, data points: 84, Loss per data point: 9.209920991101258
+Epoch 90, data points: 84, Loss per data point: 9.248251294761541
+Training completed
+user 0 / 100
+Day 6, actual_clicks_reward: 23.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1246.7511889223351, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 101, Loss per data point: 9.078918858108544
+Epoch 10, data points: 101, Loss per data point: 9.099375910614386
+Epoch 20, data points: 101, Loss per data point: 9.090182714238026
+Epoch 30, data points: 101, Loss per data point: 9.071337180341235
+Epoch 40, data points: 101, Loss per data point: 9.073397930748392
+Epoch 50, data points: 101, Loss per data point: 9.065914159068967
+Epoch 60, data points: 101, Loss per data point: 9.056331797770344
+Epoch 70, data points: 101, Loss per data point: 9.061314758946105
+Epoch 80, data points: 101, Loss per data point: 9.05382271505671
+Epoch 90, data points: 101, Loss per data point: 9.036424118619744
+Training completed
+user 0 / 100
+Day 7, actual_clicks_reward: 11.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 367.2097480290003, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 108, Loss per data point: 8.634926331505456
+Epoch 10, data points: 108, Loss per data point: 8.617387161348704
+Epoch 20, data points: 108, Loss per data point: 8.635975587354213
+Epoch 30, data points: 108, Loss per data point: 8.626698736791257
+Epoch 40, data points: 108, Loss per data point: 8.60733836175253
+Epoch 50, data points: 108, Loss per data point: 8.621189557809245
+Epoch 60, data points: 108, Loss per data point: 8.603977349310837
+Epoch 70, data points: 108, Loss per data point: 8.600133116046587
+Epoch 80, data points: 108, Loss per data point: 8.623757325457754
+Epoch 90, data points: 108, Loss per data point: 8.612223079290104
+Training completed
+user 0 / 100
+Day 8, actual_clicks_reward: 21.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1313.8092058813625, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 125, Loss per data point: 10.106801043346524
+Epoch 10, data points: 125, Loss per data point: 10.184894580960274
+Epoch 20, data points: 125, Loss per data point: 10.170097492933273
+Epoch 30, data points: 125, Loss per data point: 10.196341650858521
+Epoch 40, data points: 125, Loss per data point: 10.190192323580384
+Epoch 50, data points: 125, Loss per data point: 10.184278928130865
+Epoch 60, data points: 125, Loss per data point: 10.188229223996402
+Epoch 70, data points: 125, Loss per data point: 10.181188286855816
+Epoch 80, data points: 125, Loss per data point: 10.167176846861839
+Epoch 90, data points: 125, Loss per data point: 10.175313478976488
+Training completed
+user 0 / 100
+Day 9, actual_clicks_reward: 29.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1994.8931707007587, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 143, Loss per data point: 11.160794188301047
+Epoch 10, data points: 143, Loss per data point: 10.778889412907036
+Epoch 20, data points: 143, Loss per data point: 10.75663446879887
+Epoch 30, data points: 143, Loss per data point: 10.740985224036487
+Epoch 40, data points: 143, Loss per data point: 10.735954568675766
+Epoch 50, data points: 143, Loss per data point: 10.738866754657739
+Epoch 60, data points: 143, Loss per data point: 10.723562077729852
+Epoch 70, data points: 143, Loss per data point: 10.732051119911713
+Epoch 80, data points: 143, Loss per data point: 10.733437165357433
+Epoch 90, data points: 143, Loss per data point: 10.724921652167984
+Training completed
+user 0 / 100
+Day 10, actual_clicks_reward: 25.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1544.1334916313922, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 159, Loss per data point: 11.33400652534182
+Epoch 10, data points: 159, Loss per data point: 11.357867246903714
+Epoch 20, data points: 159, Loss per data point: 11.34511583242214
+Epoch 30, data points: 159, Loss per data point: 11.357734994542545
+Epoch 40, data points: 159, Loss per data point: 11.35597338056508
+Epoch 50, data points: 159, Loss per data point: 11.353286222197443
+Epoch 60, data points: 159, Loss per data point: 11.351754311372602
+Epoch 70, data points: 159, Loss per data point: 11.361470601650295
+Epoch 80, data points: 159, Loss per data point: 11.338664166067007
+Epoch 90, data points: 159, Loss per data point: 11.34104982707298
+Training completed
+user 0 / 100
+Day 11, actual_clicks_reward: 19.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1293.6908263945284, max_watch_duration_reward: 1286.2775933783337
+Epoch 0, data points: 174, Loss per data point: 12.031058719660017
+Epoch 10, data points: 174, Loss per data point: 12.00052246656911
+Epoch 20, data points: 174, Loss per data point: 11.895870713153105
+Epoch 30, data points: 174, Loss per data point: 11.863817951973827
+Epoch 40, data points: 174, Loss per data point: 11.849905440690874
+Epoch 50, data points: 174, Loss per data point: 11.846301134461644
+Epoch 60, data points: 174, Loss per data point: 11.844888369413628
+Epoch 70, data points: 174, Loss per data point: 11.82037383574864
+Epoch 80, data points: 174, Loss per data point: 11.834395386706824
+Epoch 90, data points: 174, Loss per data point: 11.828769256499992
+Training completed
+user 0 / 100
+Day 12, actual_clicks_reward: 22.0, max_clicks_reward: 20.867459319440805, actual_watch_duration_reward: 1045.1517463253483, max_watch_duration_reward: 1286.2775933783337
+agent name:  WeightedPairWiseModelAgent
+model parameters:  <generator object Module.parameters at 0x1311b6cf0>
+actual_clicks_reward (rounded):  277.0
+max_clicks_reward (rounded):  271.28
+actual_watch_duration_reward (rounded):  15965.25
+max_watch_duration_reward (rounded):  16721.61
+Time taken:  153.58303308486938
+rounded):  23022.81
+Time taken:  152.54069685935974
+069
+4
+36838912964

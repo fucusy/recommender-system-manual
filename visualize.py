@@ -25,22 +25,30 @@ if __name__ == "__main__":
 
     # agent name -> a list of mean watch duration over days across all runs
     watch_duration_list_per_agent = {} 
-
+    max_expected_watch_duration_list = []
     for i, logged_data_df in enumerate(selected_logged_data_dfs):
         for agent in logged_data_df:
             if agent not in watch_duration_list_per_agent:
                 watch_duration_list_per_agent[agent] = []
             watch_duration_list_per_agent[agent].append(logged_data_df[agent]["actual_watch_duration_reward_list"])
+            max_expected_watch_duration_list = logged_data_df[agent]["max_watch_duration_reward_list"]
     
     mean_watch_duration_list = {}
+    
     for agent in watch_duration_list_per_agent:
         mean_watch_duration_list[agent] = np.mean(watch_duration_list_per_agent[agent], axis=0)
 
+    agent_labels = {
+        "TweedieModelAgent": "Tweedie Regression Model",
+        "RegressionModelAgent": "Regression Model",
+        "WeightedPointWiseModelAgent": "Weighted-Duration Pointwise Model",
+        "PointWiseModelAgent": "Pointwise Model",
+    }
 
 
     for i, logged_data_df in enumerate(selected_logged_data_dfs):
-        colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'brown', 'pink', 'gray']
-        ax = plt.subplot(last_n+1, 1, i + 1)  
+        colors = ['red', 'blue', 'green', 'orange', 'purple',  'brown', 'pink', 'gray']
+        ax = plt.subplot(last_n+1, 1, i + 1)
         plotted_max_duration = False
         for agent in logged_data_df:                                   
             color = colors.pop(0)        
@@ -50,21 +58,29 @@ if __name__ == "__main__":
             if not plotted_max_duration:
                 ax.plot(logged_data_df[agent]["max_watch_duration_reward_list"], label=f"Expected max watch duration", color='black', linestyle='--')
                 plotted_max_duration = True                
-            ax.plot(logged_data_df[agent]["actual_watch_duration_reward_list"], label=f"{agent} actual watch duration", color=color)
+            ax.plot(logged_data_df[agent]["actual_watch_duration_reward_list"], label=f"{agent_labels[agent]}", color=color)
             # ax2.plot(logged_data_df[agent]["max_watch_duration_reward_list"], label=f"{agent} max watch duration", color=color)
-        ax.set_ylabel("Watch duration")
-        ax.set_title(f"index {i}")
-        ax.legend()
+        ax.set_ylabel("Total watch duration for 10,000 users")
+        ax.set_xlabel("Day") # set the position of the x label to the bottom right
+        
+        ax.set_title(f"Run {i+1}")
+        ax.legend(loc='upper left')
+        ax.grid(True)
+        # set margin
+        ax.margins(x=0.01)
 
     ax = plt.subplot(last_n+1, 1, last_n+1)  
     # plot the mean watch duration and clicks for each agent
-    colors = ['red', 'blue', 'green', 'yellow', 'purple', 'orange', 'brown', 'pink', 'gray']
+    colors = ['red', 'blue', 'green', 'orange', 'purple',  'brown', 'pink', 'gray']
+    ax.plot(max_expected_watch_duration_list, label=f"Expected max watch duration", color='black', linestyle='--')
     for agent in mean_watch_duration_list:
         color = colors.pop(0)
-        ax.plot(mean_watch_duration_list[agent], label=f"{agent} mean watch duration", color=color)
-        ax.set_ylabel("Watch duration")
-        ax.set_title(f"mean watch duration across all runs")
-        ax.legend()
+        ax.plot(mean_watch_duration_list[agent], label=f"{agent_labels[agent]}", color=color)
+        ax.set_ylabel("Total watch duration for all users")
+        ax.set_title(f"Mean watch duration from all runs")
+        ax.legend(loc='upper left')
+        ax.grid(True)
+        ax.margins(x=0.01)
 
     # save the plot to a file
     if not os.path.exists("plots"):
