@@ -400,7 +400,7 @@ if __name__ == "__main__":
     regression_agent = RegressionModelAgent(num_titles=title_size)
     # agents = [weighted_pairwise_agent, pairwise_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent]
     agents = [tweedie_agent, regression_agent, weighted_pointwise_agent, pointwise_agent, bandit, bucket_sorting_click_count_agent, watch_time_bucket_agent, pairwise_agent, weighted_pairwise_agent]
-    agents = [tweedie_agent]
+    agents = [tweedie_agent, regression_agent, weighted_pointwise_agent, pointwise_agent]
 
     # sort by probability, print the title id and value
     sorted_probabilities = sorted(enumerate(env.click_probabilities), key=lambda x: x[1], reverse=True)
